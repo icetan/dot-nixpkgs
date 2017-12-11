@@ -1,0 +1,10 @@
+text/calendar; khal printics --format "{start-date} $KHAL_FORMAT" /dev/stdin; copiousoutput;
+
+text/*;        $BROWSER '%s';
+image/*;       $BROWSER '%s';
+application/*; $BROWSER '%s';
+
+text/html; elinks -dump -force-html -dump-width 80; copiousoutput;
+
+#text/enriched;  iconv -f %{charset} -t utf-8 | pandoc -f rtf -t plain   ; copiousoutput;
+#image/*;        convert - jpg:- | jp2a --colors -                       ; copiousoutput;
