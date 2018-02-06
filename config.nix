@@ -30,15 +30,9 @@ in local {
     callPackage = lib.callPackageWith (pkgs // self);
 
     java = (import ./java.nix) { inherit pkgs; };
+    util = (import ./util.nix) { inherit pkgs; };
 
     self = rec {
-      rtrav = runCommand "rtrav" {} ''
-        mkdir -p $out/bin
-        printf %s 'rtrav_() { test -e $2/$1 && printf %s "$2" || { test $2 != / && rtrav_ $1 `dirname $2`;}; }
-        rtrav_ $@' > $out/bin/rtrav
-        chmod +x $out/bin/rtrav
-      '';
-
       bashEnv = callPackage (import ./bash.nix) {};
 
       myNeovim = callPackage (import ./vim) {};
@@ -73,6 +67,7 @@ in local {
           gnupg
           rclone
           tree
+          ripgrep
         ];
       };
 
@@ -89,6 +84,6 @@ in local {
           #compton
         ];
       };
-    } // java;
+    } // util // java;
   in self;
 }
