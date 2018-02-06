@@ -1,4 +1,4 @@
-{ writeText, fetchgit, rtrav, lib }: let
+{ writeText, fetchgit, rtrav, lib, ripgrep }: let
   inherit (builtins) readFile fromJSON elem;
   inherit (lib) filterAttrs;
 
@@ -54,5 +54,9 @@ in [
     map global goto d '<esc>:change-directory-current-buffer<ret>' -docstring 'current buffer dir'
     map global goto r '<esc>:change-directory-project-root<ret>' -docstring 'project root dir'
     map global user e ':edit-current-buffer-directory<ret>' -docstring 'edit in current buffer dir'
+  '')
+
+  (writeText "ripgrep.kak" ''
+    set global grepcmd '${ripgrep}/bin/rg --column'
   '')
 ]
