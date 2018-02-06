@@ -1,9 +1,9 @@
-{ pkgs ? import <nixpkgs> {}, rtrav }: with pkgs;
+{ pkgs ? import <nixpkgs> {} }: with pkgs;
 
 let
   inherit (builtins) fromJSON readFile;
 
-  git-src = fromJSON (readFile ./kakoune-git.json);
+  git-src = (fromJSON (readFile ./deps.json)).kakoune;
   kakoune-git = kakoune.overrideDerivation (oldAttr: {
     name = "kakoune-git-${lib.substring 0 10 git-src.date}";
     src = fetchgit (lib.filterAttrs (k: v: k != "date") git-src);
