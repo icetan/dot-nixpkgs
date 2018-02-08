@@ -16,8 +16,9 @@
   #  };
   #};
   inherit (vimUtils) makeCustomizable;
+  wrapper = callPackage (import <nixpkgs/pkgs/applications/editors/neovim/wrapper.nix>) {};
 
-  neovim-customizable = makeCustomizable (callPackage (import <nixpkgs/pkgs/applications/editors/neovim>) {
+  neovim-customizable = (wrapper {
     withPython = true;
     extraPythonPackages = with python27Packages; [
       neovim
@@ -28,8 +29,8 @@
     vimAlias = true;
   });
 in
-  (neovim-customizable.customize {
-    vimrcConfig.vam.pluginDictionaries = [
+  (neovim-customizable {
+    configure.vam.pluginDictionaries = [
       # load always
       { names = [
         # Movement and navigation
@@ -93,7 +94,7 @@ in
     ];
 
     # Available plugins
-    vimrcConfig.vam.knownPlugins = vimPlugins // {
+    configure.vam.knownPlugins = vimPlugins // {
       # Custom plugins
       solo-theme = vimUtils.buildVimPluginFrom2Nix {
         name = "vim-colors-solo-2016-05-18";
@@ -151,7 +152,7 @@ in
     };
 
     # vimrc
-    vimrcConfig.customRC = builtins.readFile ./init.vim;
+    configure.customRC = builtins.readFile ./init.vim;
 
     name = "nvim";
   }) // { name = "neovim-custom"; }
