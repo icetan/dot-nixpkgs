@@ -61,6 +61,10 @@
         esac
       '';
 
+      mail-unread = writeScript "mail-unread" ''
+        ${mu}/bin/mu find flag:u &> /dev/null
+      '';
+
       calendar-sync = writeScript "calendar-sync" ''
         curl -sL "''${1:-$ICS_SYNC_URL}" | ${myKhal}/bin/khal import --batch /dev/stdin
       '';
