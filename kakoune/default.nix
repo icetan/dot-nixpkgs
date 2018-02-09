@@ -26,5 +26,6 @@ in kakix {
     ./rc/git-edit.kak
     ./rc/auto-mkdir.kak
     ./rc/mu.kak
+    ./rc/surround.kak
   ] ++ plugins;
 }

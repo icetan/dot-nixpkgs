@@ -30,7 +30,7 @@ in [
         eslint="`${rtrav}/bin/rtrav node_modules/.bin/eslint $PWD && printf %s /node_modules/.bin/eslint || printf %s eslint`"
         tmpfile="`dirname $kak_val_buffile || echo $PWD`/__tmp.js"
         printf %s "
-          set window formatcmd 'ca_t > $tmpfile; $eslint --fix $tmpfile 2>&1 > /dev/null; cat $tmpfile; rm $tmpfile'
+          set window formatcmd 'cat > $tmpfile; $eslint --fix $tmpfile 2>&1 > /dev/null; cat $tmpfile; rm $tmpfile'
         ";
       }}
       lint-enable
