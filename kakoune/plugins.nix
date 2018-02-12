@@ -6,18 +6,22 @@
   fetch = src: fetchgit (filterAttrs (k: v: elem k ["url" "rev" "sha256"]) src);
 
   inherit (deps)
-    easymotion-src ecmascript-src eslint-formatter-src flow-src cd-src
+    #easymotion-src
+    ecmascript-src
+    eslint-formatter-src
+    flow-src
+    cd-src
     typescript-src;
 in [
-  (writeText "easymotion.kak" ''
-    source ${fetch easymotion-src}/easymotion.kak
-    map -docstring 'easymotion word' \
-      global user w :easy-motion-word<ret>
-    map -docstring 'easymotion WORD' \
-      global user W :easy-motion-WORD<ret>
-    map -docstring 'easymotion line' \
-      global user l :easy-motion-line<ret>
-  '')
+#  (writeText "easymotion.kak" ''
+#    source ${fetch easymotion-src}/easymotion.kak
+#    map -docstring 'easymotion word' \
+#      global user w :easy-motion-word<ret>
+#    map -docstring 'easymotion WORD' \
+#      global user W :easy-motion-WORD<ret>
+#    map -docstring 'easymotion line' \
+#      global user l :easy-motion-line<ret>
+#  '')
 
   #set window lintcmd '$eslint --format=${eslint-formatter-src}'
   (writeText "ecmascript.kak" ''
