@@ -8,9 +8,9 @@
   },
   "easymotion-src": {
     "url": "git://github.com/danr/kakoune-easymotion",
-    "rev": "b06d2c6afa3c8227c9cd8c968286dc9acccfb353",
-    "date": "2018-02-12T16:54:18+01:00",
-    "sha256": "04nkh6sii4289x072l9cwkivypgdik2sksgvslvgynvwnqynn9sd",
+    "rev": "6e7764b5da6266453ffcf3fab2417548b617b17f",
+    "date": "2018-03-05T20:01:26+01:00",
+    "sha256": "0i6205pnqbrszpqk93f5i1z2f9wvspf5zikwmyby1r72b0wlr2yg",
     "fetchSubmodules": true
   },
   "ecmascript-src": {
@@ -36,9 +36,9 @@
   },
   "kakoune": {
     "url": "https://github.com/mawww/kakoune.git",
-    "rev": "c939c30135930ebe6dbf963649e81a732e0830af",
-    "date": "2018-02-11T21:51:32+11:00",
-    "sha256": "13md59iywfagvvr7mwdfggil47ah7mbrv4s9mmw5hyqlzmpvi9w4",
+    "rev": "6d8747b886476b0b4e9d5512f29dd4df59f98271",
+    "date": "2018-03-19T06:28:06+11:00",
+    "sha256": "0nzkr36bc6vz7zs8ab3iq9cjzfg9hzliginzrm4x3pkw4zbdaqqf",
     "fetchSubmodules": true
   }
 }
