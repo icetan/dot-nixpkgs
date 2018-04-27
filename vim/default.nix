@@ -16,7 +16,7 @@
   #  };
   #};
   inherit (vimUtils) makeCustomizable;
-  wrapper = callPackage (import <nixpkgs/pkgs/applications/editors/neovim/wrapper.nix>) {};
+  wrapper = (callPackage (import <nixpkgs/pkgs/applications/editors/neovim/wrapper.nix>) {}) neovim;
 
   neovim-customizable = (wrapper {
     withPython = true;
@@ -29,7 +29,7 @@
     vimAlias = true;
   });
 in
-  (neovim-customizable {
+  (neovim-customizable.override {
     configure.vam.pluginDictionaries = [
       # load always
       { names = [
