@@ -55,7 +55,7 @@ decl -docstring "name of the client in which all source code jumps will be execu
     str jumpclient
 
 def -hidden mu-jump %{
-    eval -collapse-jumps %{
+    eval %{
         try %{
             exec '<a-x>s[^%]+$<ret>gh'
             set buffer mu_current_line %val{cursor_line}

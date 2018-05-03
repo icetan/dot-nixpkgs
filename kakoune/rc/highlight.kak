@@ -10,14 +10,14 @@ add-highlighter shared/trailing_white_spaces regex \h+$ 0:Error
 add-highlighter shared/ group margin
 add-highlighter shared/margin regex ^[^\n]{80}([^\n]) 1:+r #column 81 +r
 
-hook global InsertEnd .* %{
-  add-highlighter window ref tabs
-  add-highlighter window ref trailing_white_spaces
-}
-
-hook global InsertBegin .* %{
+hook global ModeChange .*:insert %{
   remove-highlighter window/tabs
   remove-highlighter window/trailing_white_spaces
+}
+
+hook global ModeChange insert:.* %{
+  add-highlighter window ref tabs
+  add-highlighter window ref trailing_white_spaces
 }
 
 hook global WinCreate .* %{

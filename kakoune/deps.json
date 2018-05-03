@@ -15,9 +15,9 @@
   },
   "ecmascript-src": {
     "url": "git://github.com/Delapouite/kakoune-ecmascript",
-    "rev": "28fda0347f9d8d06ac8e7555f8aa1f84d0f9e2ff",
-    "date": "2017-11-05T17:55:43+01:00",
-    "sha256": "1hc7ap428z8h2h5s6hv5zy4whx95si5j4s63ncdpagf6snafyghj",
+    "rev": "e6a60cd21a2e9e2cb8fa97343c28f8f187a92585",
+    "date": "2018-04-28T18:55:59+02:00",
+    "sha256": "0z4klj4i96dw1idjvdpkn782xqqza90y08xdyslgg6506jn8f183",
     "fetchSubmodules": true
   },
   "eslint-formatter-src": {
@@ -36,9 +36,9 @@
   },
   "kakoune": {
     "url": "https://github.com/mawww/kakoune.git",
-    "rev": "0f38be544ce5c29fb82f789a01629f7cba53cd93",
-    "date": "2018-04-14T13:05:59+10:00",
-    "sha256": "1xryvdgyfd61jkzn4apgh4kdy9v2c6dd165m5452s0ndq8bskm59",
+    "rev": "a19ce3763468879df0548d6c803e54f8fd1a13cc",
+    "date": "2018-05-03T08:14:15+10:00",
+    "sha256": "1037mj93qn97jbw2frxb78ya1dx29rfgfhh0gzna6w7f48hairry",
     "fetchSubmodules": true
   }
 }
