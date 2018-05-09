@@ -1,4 +1,6 @@
 { pkgs }: let
+  inherit (builtins) nixPath trace pathExists elem readFile;
+
   pkgs-src = fetchTarball "https://nixos.org/channels/nixos-17.09/nixexprs.tar.xz";
   stablePkgs = import pkgs-src {};
 
@@ -11,12 +13,12 @@
     export PS1="$PS1"
   '';
 
-  #nixPaths = pkgs.lib.listToAttrs (map (x: { name = x.prefix; value = toString x.path; }) builtins.nixPath);
-  nixPaths = map (x: x.prefix) builtins.nixPath;
-  localConfigExists = builtins.elem "local-config" nixPaths; #?local-config && (builtins.pathExists nixPaths.local-config);
+  #nixPaths = pkgs.lib.listToAttrs (map (x: { name = x.prefix; value = toString x.path; }) nixPath);
+  nixPaths = map (x: x.prefix) nixPath;
+  localConfigExists = elem "local-config" nixPaths; #?local-config && (pathExists nixPaths.local-config);
   local = if localConfigExists
      then (import <local-config> { inherit pkgs; })
-     else builtins.trace "no <local-config> in NIX path" (x: x);
+     else trace "no <local-config> in NIX path" (x: x);
 in local {
   allowUnfree = true;
   allowBroken = true;
@@ -41,6 +43,8 @@ in local {
 
       myWeechat = callPackage (import ./weechat.nix) {};
 
+      myGit = (callPackage (import ./git.nix) {}) { extraConf = readFile ~/.gitconfig.local; };
+
       myTmux = callPackage (import ./tmux) {};
 
       myGhc = callPackage (import ./haskell.nix) {};
@@ -61,7 +65,7 @@ in local {
         paths = [
           myTmux
           myKakoune
-          git
+          myGit
           qrencode
           pass
           gnupg
