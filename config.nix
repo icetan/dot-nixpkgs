@@ -43,7 +43,10 @@ in local {
 
       myWeechat = callPackage (import ./weechat.nix) {};
 
-      myGit = (callPackage (import ./git.nix) {}) { extraConf = readFile ~/.gitconfig.local; };
+      myGit = (callPackage (import ./git) {}) {
+        extraConf = ~/.gitconfig.local;
+        excludesFile = git/gitignore;
+      };
 
       myTmux = callPackage (import ./tmux) {};
 

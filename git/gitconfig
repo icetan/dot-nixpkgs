@@ -1,0 +1,23 @@
+[push]
+    default = simple
+[alias]
+    fap = fetch --all --prune
+    s    = status -s
+    glog = log --graph --decorate
+    ls   = log --pretty=format:"%C(auto)%h\\ (%ad)\\ %Cblue<%an>%x09%Creset%s%C(auto)%d" --decorate --date=relative
+    lss  = log --pretty=format:"%C(auto)%h\\ (%ad)\\ %Cblue<%an>\\ %G?%x09%Creset%s%C(auto)%d" --decorate --date=relative
+    lsg  = log --pretty=format:"%C(auto)%h\\ (%ad)\\ %Cblue<%an>%x09%Creset%s%C(auto)%d" --decorate --date=relative --graph
+    lsga = log --pretty=format:"%C(auto)%h\\ (%ad)\\ %Cblue<%an>%x09%Creset%s%C(auto)%d" --decorate --date=relative --graph --all
+    incoming = "!git remote update -p; git log ..@{u}"
+    outgoing = log @{u}..
+    # worktree
+    wl = worktree list
+    wa = worktree add
+    wp = worktree prune
+[init]
+    templatedir = ${templatedir}
+[rebase]
+    autosquash = true
+[rerere]
+    enabled = true
+    autoupdate = true
