@@ -37,6 +37,11 @@ let
           excludesfile = ${toString excludesFile}
     '')
 
+    + (''
+      [init]
+        templatedir = ${templatedir}
+    '')
+
     + (readFile ./gitconfig)
   );
 

@@ -14,8 +14,6 @@
     wl = worktree list
     wa = worktree add
     wp = worktree prune
-[init]
-    templatedir = ${templatedir}
 [rebase]
     autosquash = true
 [rerere]
