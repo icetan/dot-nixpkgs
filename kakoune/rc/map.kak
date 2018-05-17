@@ -24,3 +24,7 @@ map -docstring 'case insensitive extend search' \
   global normal '?' ?(?i)
 map -docstring 'case insensitive backward extend-search' \
   global normal '<a-?>' <a-?>(?i)
+
+# Select inner/surrounding object
+map -docstring 'select anglebraces both ways' \
+  global object A c<lt>|>,<lt>|><ret>
