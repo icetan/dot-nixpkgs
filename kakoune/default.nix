@@ -23,7 +23,9 @@ in kakix {
     ./rc/fzf.kak
     ./rc/git-edit.kak
     ./rc/auto-mkdir.kak
-    ./rc/mu.kak
     ./rc/surround.kak
+
+    ./rc/mu.kak
+    ./rc/gito.kak
   ] ++ plugins;
 }
