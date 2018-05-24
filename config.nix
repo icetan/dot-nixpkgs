@@ -44,7 +44,7 @@ in local {
       myWeechat = callPackage (import ./weechat.nix) {};
 
       myGit = (callPackage (import ./git) {}) {
-        extraConf = ~/.gitconfig.local;
+        extraConf = ~/.local/gitconfig;
         excludesFile = git/gitignore;
       };
 
