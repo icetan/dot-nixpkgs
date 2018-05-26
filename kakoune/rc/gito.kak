@@ -16,7 +16,25 @@ gito-sync %{ %sh{
   ( gito sync "${kak_buffile}" 2>&1 ) > /dev/null 2>&1 < /dev/null &
 }}
 
-def -docstring %{gito-enable: enable gito sync for this buffer} \
+decl -docstring "name of the client in which utilities display information" \
+    str toolsclient
+def -docstring %{gito-listen: start a gito listener in current directory} \
+gito-listen %{ %sh{
+    output=$(mktemp -d "${TMPDIR:-/tmp}"/kak-gito.XXXXXXXX)/fifo
+    mkfifo ${output}
+    ( gito listen > ${output} 2>&1 ) > /dev/null 2>&1 < /dev/null &
+
+    printf %s\\n "eval -try-client '$kak_opt_toolsclient' %{
+      edit! -fifo ${output} *gito*
+      set buffer filetype log
+      hook -group fifo buffer BufCloseFifo .* %{
+         nop %sh{ rm -r $(dirname ${output}) }
+         remove-hooks buffer fifo
+      }
+    }"
+}}
+
+def -docstring %{gito-enable: enable gito sync} \
 gito-enable %{
   hook -group gito global BufCreate .* %{ %sh{
     [ "${kak_buffile}" ] && gito gitopath -q "${kak_buffile}" \
@@ -28,7 +46,7 @@ gito-enable %{
   }}
 }
 
-def -docstring %{gito-enable: disable gito sync for this buffer} \
+def -docstring %{gito-enable: disable gito sync} \
 gito-disable %{
   autosave-disable
   set buffer autoreload ask
