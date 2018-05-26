@@ -23,7 +23,8 @@ let
   '';
   templatedir = runCommand "git-template" {} ''
     mkdir -p $out/hooks
-    ln -s ${git-commit-msg} $out/hooks/commit-msg
+    cp ${git-commit-msg} $out/hooks/commit-msg
+    chmod +x $out/hooks/commit-msg
   '';
 
   gitconfig = writeText "gitconfig" (
