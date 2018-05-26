@@ -27,5 +27,6 @@ in kakix {
 
     ./rc/mu.kak
     ./rc/gito.kak
+    (writeText "gito-enable.kak" "gito-enable")
   ] ++ plugins;
 }

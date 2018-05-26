@@ -1,4 +1,4 @@
-def -docstring %{autosave-enable: enable autosave for file buffer} \
+def -docstring %{autosave-enable: enable autosave for this file buffer} \
 autosave-enable %{ %sh{
   [ "${kak_buffile}" ] \
     && printf %s\\n 'hook -group autosave buffer NormalIdle .* %{ %sh{
@@ -6,7 +6,7 @@ autosave-enable %{ %sh{
     }}'
 }}
 
-def -docstring %{autosave-enable: disable autosave for buffer} \
+def -docstring %{autosave-enable: disable autosave for this file buffer} \
 autosave-disable %{
   remove-hooks buffer autosave
 }
@@ -17,18 +17,21 @@ gito-sync %{ %sh{
 }}
 
 def -docstring %{gito-enable: enable gito sync for this buffer} \
-gito-enable %{ %sh{
-  [ "${kak_buffile}" ] && gito gitopath -q "${kak_buffile}" \
-    && printf %s\\n 'eval %{
-      autosave-enable
-      set buffer autoreload yes
-      hook -group gito buffer BufWritePost .* gito-sync
-    }'
-}}
+gito-enable %{
+  hook -group gito global BufCreate .* %{ %sh{
+    [ "${kak_buffile}" ] && gito gitopath -q "${kak_buffile}" \
+      && printf %s\\n 'eval %{
+        autosave-enable
+        set buffer autoreload yes
+        hook -group gito buffer BufWritePost .* gito-sync
+      }'
+  }}
+}
 
 def -docstring %{gito-enable: disable gito sync for this buffer} \
 gito-disable %{
   autosave-disable
   set buffer autoreload ask
   remove-hooks buffer gito
+  remove-hooks global gito
 }
