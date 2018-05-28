@@ -26,7 +26,7 @@ in kakix {
     ./rc/surround.kak
 
     ./rc/mu.kak
-    ./rc/gito.kak
-    (writeText "gito-enable.kak" "gito-enable")
+    ./rc/pairon.kak
+    (writeText "pairon-enable.kak" "pairon-enable")
   ] ++ plugins;
 }
