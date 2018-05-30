@@ -75,6 +75,7 @@ in local {
           rclone
           tree
           ripgrep
+          jq
         ];
       };
 

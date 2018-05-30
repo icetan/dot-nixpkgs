@@ -21,9 +21,10 @@
 
     util-scripts = rec {
       mail-sync = writeScript "mail-sync" ''
+        #!${dash}/bin/dash
         set -e
         to_sync="''${1-${concatMapStringsSep " " (a: a.name) accounts}}"
-        sync-account() {
+        sync_account() {
           case "$1" in
             ${concatMapStrings (a: with a; ''
             ${name})
@@ -39,11 +40,13 @@
         }
 
         for n in $to_sync; do
-          sync-account "$n"
+          sync_account "$n"
         done
       '';
 
       mail-view = writeScript "mail-view" ''
+        #!${dash}/bin/dash
+        set -e
         case "$1" in
           text/html)
             ${elinks}/bin/elinks -dump -force-html -dump-width 80 < "$2"
@@ -62,14 +65,17 @@
       '';
 
       mail-unread = writeScript "mail-unread" ''
-        ${mu}/bin/mu find flag:u &> /dev/null
+        #!${dash}/bin/dash
+        ${mu}/bin/mu find flag:u >/dev/null 2>&1
       '';
 
       calendar-sync = writeScript "calendar-sync" ''
+        #!${dash}/bin/dash
         curl -sL "''${1:-$ICS_SYNC_URL}" | ${myKhal}/bin/khal import --batch /dev/stdin
       '';
 
       agenda = writeScript "kagenda" ''
+        #!${dash}/bin/dash
         watch -n 300 -ct '${calendar-sync}; ${myKhal}/bin/khal --color list --format "${khalFormat}" today ''${1:-20} days'
       '';
     };

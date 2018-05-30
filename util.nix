@@ -7,6 +7,9 @@ lib.mapAttrs (name: script:
   ''
 ) {
   update-deps = writeScript "update-deps" ''
+    #!${dash}/bin/dash
+    set -e
+
     export PATH=${jq}/bin:${nix-prefetch-git}/bin:$PATH
     input=''${1-/dev/stdin}
     if [ "$1" ]; then
@@ -24,8 +27,11 @@ lib.mapAttrs (name: script:
   '';
 
   rtrav = writeScript "rtrav" ''
+    #!${dash}/bin/dash
+    set -e
     rtrav_() {
       test -e $2/$1 && printf %s "$2" || { test $2 != / && rtrav_ $1 `dirname $2`;}
     }
+    rtrav_ $@
   '';
 }
