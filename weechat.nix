@@ -13,13 +13,18 @@ let
     tclSupport = pluginSupported "tcl";
     pythonSupport = pluginSupported "python";
     perlSupport = pluginSupported "perl";
-    extraBuildInputs = with pythonPackages; [ websocket_client ];
+    #extraBuildInputs = [ ];
 
     #configure = null;
-    configure = { availablePlugins, ... }: {
-      plugins = attrValues (filterAttrs (n: p: pluginSupported n) availablePlugins);
+    configure = { availablePlugins, ... }: let
+      availablePlugins' = availablePlugins // {
+        python = availablePlugins.python.withPackages (pypkgs: with pypkgs; [
+          websocket_client
+        ]);
+      };
+    in {
+      plugins = attrValues (filterAttrs (n: p: pluginSupported n) availablePlugins');
     };
-
   });
 in with luaPackages; runCommand "weechat-wrapper" { buildInputs = [ makeWrapper ]; } ''
   makeWrapper ${weechat-custom}/bin/weechat $out/bin/weechat \
