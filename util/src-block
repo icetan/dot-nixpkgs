@@ -10,8 +10,8 @@ $END_RES = $ENV{SB_END_RES};
 $PRE     = $ENV{SB_PRE};
 $PRE_END = $ENV{SB_PRE_END};
 
-if ($STYLE =~ m/org/i) {
-  # Hash style comments
+if ($STYLE =~ m/^org$/i) {
+  # Org mode style comments
   $START   //= "^[\t ]*#\\+BEGIN_COMMENT\n%f\\[";
   $END     //= "]\n[\t ]*#\\+END_COMMENT";
   $END_RES //= "# END\\[]";
