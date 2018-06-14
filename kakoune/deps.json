@@ -1,16 +1,16 @@
 {
   "cd-src": {
     "url": "git://github.com/Delapouite/kakoune-cd",
-    "rev": "b4913fbfcf73c76af73f5936b2a0278ec4baa438",
-    "date": "2017-07-05T15:30:41+02:00",
-    "sha256": "0jc8dvrlhd2bzqpr5r0l5vlv7hgz2avnn2cph3a1mald0fnplhqb",
+    "rev": "707ebaee0bbf29a6cd77264e0e2f3d8b8a5be9a6",
+    "date": "2018-05-23T22:53:34+02:00",
+    "sha256": "0clq7gjxsi65c9q4ir9p3kyn3skg8r4d9kpp72vfr6lxnldr3fi6",
     "fetchSubmodules": true
   },
   "easymotion-src": {
     "url": "git://github.com/danr/kakoune-easymotion",
-    "rev": "8f650e5d7989021364b34a10a62bc9650e85c0ce",
-    "date": "2018-04-08T02:03:12+02:00",
-    "sha256": "0kpmj3x5h10v0b53hzz6dv9xyhiazhj4dcs4nvjjd99rqav57w4q",
+    "rev": "481755da9c7be56e0c55390c700e491fd5fc56e0",
+    "date": "2018-05-25T11:30:14+03:00",
+    "sha256": "02zgb6q1fbs48lafya0s7yzv4g88b2j8nzr0nlff752vjiafaa6p",
     "fetchSubmodules": true
   },
   "ecmascript-src": {
@@ -29,16 +29,23 @@
   },
   "flow-src": {
     "url": "git://github.com/Delapouite/kakoune-flow",
-    "rev": "9188d27b053ea1467ebca4c4bb6e014a7e186c12",
-    "date": "2017-11-06T11:35:26+01:00",
-    "sha256": "03y8xz5xyl42hjn62gfkzvbsr5hw3vdkls89yjwjgrv4nxlmlafr",
+    "rev": "c6d16a41cb9ec84705d19de303fe65c715b9bfd9",
+    "date": "2018-05-21T14:39:49+02:00",
+    "sha256": "1b65zpnrdwywkaip46rzx1r4jza9f8vb034ry4s95i1818h5vkdd",
     "fetchSubmodules": true
   },
   "kakoune": {
     "url": "https://github.com/mawww/kakoune.git",
-    "rev": "a19ce3763468879df0548d6c803e54f8fd1a13cc",
-    "date": "2018-05-03T08:14:15+10:00",
-    "sha256": "1037mj93qn97jbw2frxb78ya1dx29rfgfhh0gzna6w7f48hairry",
+    "rev": "665d3fa196f4df905ebd682965adf78d80eaf8a8",
+    "date": "2018-06-13T07:11:03+10:00",
+    "sha256": "0l0v0spp40a032hf2lqc08rzbsdgqzvwyxs27bg0nbr2nxj9r6hc",
+    "fetchSubmodules": true
+  },
+  "kakoune-icetan": {
+    "url": "https://github.com/icetan/kakoune.git",
+    "rev": "fb1274010f9497a1312415a63210a64f1e543c9a",
+    "date": "2018-06-13T00:38:39+02:00",
+    "sha256": "15zvlzaxzhky12j0bpa8y8sl4lb8jz5jwpk82v2z15k43b5v398k",
     "fetchSubmodules": true
   }
 }
