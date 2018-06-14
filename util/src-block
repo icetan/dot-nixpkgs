@@ -12,14 +12,14 @@ $PRE_END = $ENV{SB_PRE_END};
 
 if ($STYLE =~ m/org/i) {
   # Hash style comments
-  $START   //= "#%f\\[";
-  $END     //= "#]";
-  $END_RES //= "#END]";
+  $START   //= "^[\t ]*#\\+BEGIN_COMMENT\n%f\\[";
+  $END     //= "]\n[\t ]*#\\+END_COMMENT";
+  $END_RES //= "# END]";
   $PRE     //= "#+BEGIN_EXAMPLE";
   $PRE_END //= $ENV{SB_PRE} // "#+END_EXAMPLE";
 } else {
   # XML/Markdown style comments (default)
-  $START   //= "<!--%f#";
+  $START   //= "[\t ]*<!--%f#";
   $END     //= "#-->";
   $END_RES //= "<!--END#-->";
   $PRE     //= "```";
@@ -34,7 +34,7 @@ $DEL = shift if $ARGV[0] eq "-d";
 
 sub r { my %g = @_;
   return $g{all} if ($DEL or $g{flags} =~ m/x/);
-  local $_ = `printf %s "$g{body}" | $g{cmd}`;
+  local $_ = `printf %s '$g{body}' | $g{cmd}`;
   if ($g{flags} =~ m/p/) { s/^/$PRE/; s/\n?$/$PRE_END/; }
   if ($g{flags} !~ m/[p]/) { s/^/\n/; }
   return $g{all} . $_ . $END_RES;
@@ -42,5 +42,5 @@ sub r { my %g = @_;
 
 undef $/;
 $_ = <>;
-s/(?<all>$START *(?<cmd>.+?)(?:\n(?<body>.*?))?$END)(?:(?:(?!$START).)*?$END_RES)?/r(%+)/ges;
+s/(?<all>$START *(?<cmd>.+?)(?:\n(?<body>.*?))?$END)(?:(?:(?!$START).)*?$END_RES)?/r(%+)/mges;
 print;
