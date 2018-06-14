@@ -1,19 +1,46 @@
 #!/usr/bin/env perl
-$FLAGS="mpx";
-$END="<!--END#-->";
+$FLAGS = "px";
 
-sub r {
-  my ($all, $flags, $cmd, $body)=@_;
-  return $all if ($del or $flags =~ m/x/);
-  local $_ = `printf %s "$body" | $cmd`;
-  if ($flags =~ m/p/) { s/^/<pre>\n/; s/\n?$/\n<\/pre>/; }
-  if ($flags =~ m/m/) { s/^/\n```\n/; s/$/\n```/; }
-  if ($flags !~ m/[mp]/) { s/^/\n/; }
-  return $all . $_ . $END;
+$STYLE = $ENV{SB_STYLE};
+$PRE_BREAK = not $ENV{SB_NO_PRE_BREAK};
+
+$START   = $ENV{SB_START};
+$END     = $ENV{SB_END};
+$END_RES = $ENV{SB_END_RES};
+$PRE     = $ENV{SB_PRE};
+$PRE_END = $ENV{SB_PRE_END};
+
+if ($STYLE =~ m/org/i) {
+  # Hash style comments
+  $START   //= "#%f\\[";
+  $END     //= "#]";
+  $END_RES //= "#END]";
+  $PRE     //= "#+BEGIN_EXAMPLE";
+  $PRE_END //= $ENV{SB_PRE} // "#+END_EXAMPLE";
+} else {
+  # XML/Markdown style comments (default)
+  $START   //= "<!--%f#";
+  $END     //= "#-->";
+  $END_RES //= "<!--END#-->";
+  $PRE     //= "```";
+  $PRE_END //= $PRE;
+}
+
+$PRE =~ s/^|$/\n/g if $PRE_BREAK;
+$PRE_END =~ s/^|$/\n/g if $PRE_BREAK;
+$START =~ s/%f/(?<flags>[$FLAGS]*)/;
+
+$DEL = shift if $ARGV[0] eq "-d";
+
+sub r { my %g = @_;
+  return $g{all} if ($DEL or $g{flags} =~ m/x/);
+  local $_ = `printf %s "$g{body}" | $g{cmd}`;
+  if ($g{flags} =~ m/p/) { s/^/$PRE/; s/\n?$/$PRE_END/; }
+  if ($g{flags} !~ m/[p]/) { s/^/\n/; }
+  return $g{all} . $_ . $END_RES;
 }
 
 undef $/;
-$del = shift if $ARGV[0] eq "-d";
 $_ = <>;
-s/(<!--([$FLAGS]*)\# *(.+?)(?:\n(.*?))?\#-->)(?:(?:(?!<!--[$FLAGS]*\#).)*?$END)?/r($1,$2,$3,$4)/ges;
+s/(?<all>$START *(?<cmd>.+?)(?:\n(?<body>.*?))?$END)(?:(?:(?!$START).)*?$END_RES)?/r(%+)/ges;
 print;
