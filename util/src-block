@@ -14,14 +14,14 @@ if ($STYLE =~ m/org/i) {
   # Hash style comments
   $START   //= "^[\t ]*#\\+BEGIN_COMMENT\n%f\\[";
   $END     //= "]\n[\t ]*#\\+END_COMMENT";
-  $END_RES //= "# END]";
+  $END_RES //= "# END\\[]";
   $PRE     //= "#+BEGIN_EXAMPLE";
   $PRE_END //= $ENV{SB_PRE} // "#+END_EXAMPLE";
 } else {
   # XML/Markdown style comments (default)
-  $START   //= "[\t ]*<!--%f#";
-  $END     //= "#-->";
-  $END_RES //= "<!--END#-->";
+  $START   //= "[\t ]*<!--%f\\[";
+  $END     //= "]-->";
+  $END_RES //= "<!--END\\[]-->";
   $PRE     //= "```";
   $PRE_END //= $PRE;
 }
@@ -29,6 +29,7 @@ if ($STYLE =~ m/org/i) {
 $PRE =~ s/^|$/\n/g if $PRE_BREAK;
 $PRE_END =~ s/^|$/\n/g if $PRE_BREAK;
 $START =~ s/%f/(?<flags>[$FLAGS]*)/;
+$END_RES_ = $END_RES =~ s/\\//rg;
 
 $DEL = shift if $ARGV[0] eq "-d";
 
@@ -37,7 +38,7 @@ sub r { my %g = @_;
   local $_ = `printf %s '$g{body}' | $g{cmd}`;
   if ($g{flags} =~ m/p/) { s/^/$PRE/; s/\n?$/$PRE_END/; }
   if ($g{flags} !~ m/[p]/) { s/^/\n/; }
-  return $g{all} . $_ . $END_RES;
+  return $g{all} . $_ . $END_RES_;
 }
 
 undef $/;
