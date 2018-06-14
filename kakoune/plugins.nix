@@ -1,4 +1,4 @@
-{ writeText, fetchgit, rtrav, lib, ripgrep }: let
+{ writeText, fetchgit, rtrav, src-block, lib, ripgrep }: let
   inherit (builtins) readFile fromJSON elem;
   inherit (lib) filterAttrs;
 
@@ -62,5 +62,9 @@ in [
 
   (writeText "ripgrep.kak" ''
     set global grepcmd '${ripgrep}/bin/rg --column'
+  '')
+
+  (writeText "src-block.kak" ''
+    map global user '#' '%|${src-block}/bin/src-block<ret>' -docstring 'expand source blocks'
   '')
 ]

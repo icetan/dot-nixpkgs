@@ -1,0 +1,19 @@
+#!/usr/bin/env perl
+$FLAGS="mpx";
+$END="<!--END#-->";
+
+sub r {
+  my ($all, $flags, $cmd, $body)=@_;
+  return $all if ($del or $flags =~ m/x/);
+  local $_ = `printf %s "$body" | $cmd`;
+  if ($flags =~ m/p/) { s/^/<pre>\n/; s/\n?$/\n<\/pre>/; }
+  if ($flags =~ m/m/) { s/^/\n```\n/; s/$/\n```/; }
+  if ($flags !~ m/[mp]/) { s/^/\n/; }
+  return $all . $_ . $END;
+}
+
+undef $/;
+$del = shift if $ARGV[0] eq "-d";
+$_ = <>;
+s/(<!--([$FLAGS]*)\# *(.+?)(?:\n(.*?))?\#-->)(?:(?:(?!<!--[$FLAGS]*\#).)*?$END)?/r($1,$2,$3,$4)/ges;
+print;

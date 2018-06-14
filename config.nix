@@ -32,7 +32,7 @@ in local {
     callPackage = lib.callPackageWith (pkgs // self);
 
     java = (import ./java.nix) { inherit pkgs; };
-    util = (import ./util.nix) { inherit pkgs; };
+    util = (import ./util) { inherit pkgs; };
 
     self = rec {
       bashEnv = callPackage (import ./bash.nix) {};

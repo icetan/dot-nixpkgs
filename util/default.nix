@@ -1,9 +1,10 @@
 { pkgs }: with pkgs;
 
 lib.mapAttrs (name: script:
-  runCommand name {} ''
+  runCommand name { buildInputs = [ perl ]; } ''
     mkdir -p $out/bin
-    ln -s ${script} $out/bin/${name}
+    cp ${script} $out/bin/${name}
+    patchShebangs $out/bin
   ''
 ) {
   update-deps = writeScript "update-deps" ''
@@ -34,4 +35,6 @@ lib.mapAttrs (name: script:
     }
     rtrav_ $@
   '';
+
+  src-block = ./src-block;
 }
