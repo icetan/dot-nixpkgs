@@ -1,13 +1,14 @@
-{ lib, stdenv, callPackage, writeText, runCommand, makeWrapper, git, bash }:
+{ lib, stdenv, callPackage, writeText, runCommand, makeWrapper, git, gnupg }:
 
 { extraConf ? null, excludesFile ? null }:
 
 let
   inherit (builtins) toString readFile;
   inherit (lib.strings) optionalString;
+  inherit (lib) makeBinPath;
 
   git-commit-msg = writeText "commit-msg" ''
-    #!${bash}/bin/bash
+    #!/bin/bash
     set -e
 
     grepit() { grep -Eo '^[A-Z]{1,}-[0-9]{1,}\b' $@; }
@@ -47,12 +48,12 @@ let
   );
 
   homedir = runCommand "gitconfig-home" {} ''
-    mkdir -p $out
-    ln -s ${gitconfig} $out/.gitconfig
+    mkdir -p $out/git
+    ln -s ${gitconfig} $out/git/config
   '';
 in runCommand "git-wrapper" { buildInputs = [ makeWrapper ]; } ''
   makeWrapper ${git}/bin/git $out/bin/git \
     --set GIT_CONFIG_NOSYSTEM 1 \
     --set XDG_CONFIG_HOME '${homedir}' \
-    --set HOME '${homedir}'
+    --prefix PATH : ${makeBinPath [ gnupg ]}
 ''

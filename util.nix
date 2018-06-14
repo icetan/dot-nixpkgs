@@ -12,7 +12,7 @@ lib.mapAttrs (name: script:
 
     export PATH=${jq}/bin:${nix-prefetch-git}/bin:$PATH
     input=''${1-/dev/stdin}
-    if [ "$1" ]; then
+    if test -n "$1"; then
       output=$(mktemp)
     else
       output=/dev/stdout
@@ -21,7 +21,7 @@ lib.mapAttrs (name: script:
       | jq -r '. as $o | keys | map(.+" "+$o[.].url)[]' \
       | while read k v; do echo "{\"$k\": $(nix-prefetch-git $v)}"; done \
       | jq -s 'reduce .[] as $x ({}; . * $x)' > $output
-    if [[ $input != /dev/stdin && $output != /dev/stdout ]]; then
+    if { test $input != /dev/stdin && test $output != /dev/stdout; }; then
       mv $output $input
     fi
   '';
@@ -30,7 +30,7 @@ lib.mapAttrs (name: script:
     #!${dash}/bin/dash
     set -e
     rtrav_() {
-      test -e $2/$1 && printf %s "$2" || { test $2 != / && rtrav_ $1 `dirname $2`;}
+      test -e $2/$1 && printf %s "$2" || { test $2 != / && rtrav_ $1 `dirname $2`; }
     }
     rtrav_ $@
   '';
