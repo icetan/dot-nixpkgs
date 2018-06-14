@@ -41,7 +41,7 @@ in local {
 
       myKakoune = callPackage (import ./kakoune) {};
 
-      myWeechat = callPackage (import ./weechat.nix) {};
+      myWeechat = callPackage (import ./weechat) {};
 
       myGit = (callPackage (import ./git) {}) {
         extraConf = ~/.local/gitconfig;
@@ -69,13 +69,21 @@ in local {
           myTmux
           myKakoune
           myGit
-          qrencode
-          pass
-          gnupg
-          rclone
+
+          gitAndTools.hub
+          git-crypt
           tree
           ripgrep
           jq
+          qrencode
+          rclone
+
+          pass
+          gnupg
+
+          aspell
+          aspellDicts.en
+          aspellDicts.sv
         ];
       };
 
@@ -86,6 +94,7 @@ in local {
           rofi
           rofi-pass
           xsel
+          maim
           #nitrogen
           xautolock
           #termite
