@@ -36,12 +36,12 @@ let
 
     + (optionalString (excludesFile != null) ''
       [core]
-          excludesfile = ${toString excludesFile}
+          excludesFile = ${toString excludesFile}
     '')
 
     + (''
       [init]
-        templatedir = ${templatedir}
+          templateDir = ${templatedir}
     '')
 
     + (readFile ./gitconfig)

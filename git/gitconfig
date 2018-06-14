@@ -15,9 +15,9 @@
     wa = worktree add
     wp = worktree prune
 [rebase]
-    autosquash = true
+    autoSquash = true
 [rerere]
     enabled = true
-    autoupdate = true
+    autoUpdate = true
 [commit]
-    gpgsign = true
+    gpgSign = true
