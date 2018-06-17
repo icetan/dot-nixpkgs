@@ -1,10 +1,11 @@
 #!/usr/bin/env perl
-$FLAGS = "prx";
 
 $STYLE = $ENV{SB_STYLE};
 $PRE_BREAK = not $ENV{SB_NO_PRE_BREAK};
+$ALWAYS_END = $ENV{SB_ALWAYS_END};
 
 $START   = $ENV{SB_START};
+$CMD_END = $ENV{SB_CMD_END};
 $END     = $ENV{SB_END};
 $STR_RES = $ENV{SB_STR_RES};
 $PRE_RES = $ENV{SB_PRE_RES};
@@ -13,14 +14,13 @@ $PRE_END = $ENV{SB_PRE_END};
 $END_RES = $ENV{SB_END_RES};
 
 if ($STYLE =~ m/^org$/i) {
-  # Org mode style comments
+  # Org mode output as comments
   $START   //= "^[\t ]*#\\+BEGIN_SRC[\t ]+";
   $END     //= "^[\t ]*#\\+END_SRC\$";
-  $STR_RES //= "\n#\\+RESULTS:\n";
+  $STR_RES //= "\n\n*#\\+RESULTS:\n";
   $PRE_RES //= ": ";
-  $END_RES //= "#\\ END_RESULTS";
-} else {
-  # Markdown style comments (default)
+} elsif ($STYLE =~ m/^md$/i) {
+  # Markdown input as comments
   $START   //= "<!--%f\\[";
   $END     //= "]-->";
   $STR_RES //= "\n";
@@ -28,13 +28,22 @@ if ($STYLE =~ m/^org$/i) {
   $PRE     //= "```";
   $PRE_END //= $PRE;
   $END_RES //= "<!--END\\[]-->";
+} else {
+  # Markdown output as comments (default)
+  $START   //= "<!--\\[";
+  $CMD_END //= "]-->\n```";
+  $END     //= "```";
+  $STR_RES //= "\n<!--:\n";
+  $PRE_RES //= ": ";
+  $END_RES //= ":-->";
+  $ALWAYS_END //= true;
 }
 
-$START =~ s/%f/(?<flags>[$FLAGS]*)/;
+$START =~ s/%f/(?<flags>[a-z]*)/;
 $PRE =~ s/^|$/\n/g if $PRE_BREAK;
 $PRE_END =~ s/^|$/\n/g if $PRE_BREAK;
-$STR_RES_ = $STR_RES =~ s/[\\]//rg;
-$END_RES_ = $END_RES =~ s/[\\]//rg;
+$STR_RES_ = $STR_RES =~ s/(?<!\\)[\\*?+]//rg;
+$END_RES_ = $END_RES =~ s/(?<!\\)[\\*?+]//rg;
 
 $DEL = shift if $ARGV[0] eq "-d";
 
@@ -44,7 +53,7 @@ sub r { my %g = @_;
   if ($g{flags} !~ m/[pr]/) { s/^/$PRE_RES/gsm; $_ = $STR_RES_ . $_; }
   if ($g{flags} =~ m/[p]/ ) { $_ = $PRE . $_ . $PRE_END; }
   if ($g{flags} =~ m/[r]/ ) { $_ = "\n" . $_; }
-  if ($g{flags} =~ m/[pr]/) { $_ .= $END_RES_; }
+  if ($ALWAYS_END or $g{flags} =~ m/[pr]/) { $_ .= $END_RES_; }
   return $g{all} . $_;
 }
 
@@ -52,5 +61,5 @@ undef $/;
 $_ = <>;
 $PREFIX_MATCH = "(?:$STR_RES(?:$PRE_RES.*?\n)+)?";
 $END_MATCH = "(?:(?:(?!$START).)*?$END_RES)?";
-s/(?<all>$START[\t ]*(?<cmd>.+?)(?:\n(?<body>.*?))?$END)$PREFIX_MATCH$END_MATCH/r(%+)/mges;
+s/(?<all>$START[\t ]*(?<cmd>.+?)$CMD_END(?:\n(?<body>.*?))?$END)$PREFIX_MATCH$END_MATCH/r(%+)/mges;
 print;

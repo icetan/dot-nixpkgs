@@ -65,6 +65,7 @@ in [
   '')
 
   (writeText "src-block.kak" ''
-    map global user '#' '%|SB_STYLE=''${kak_buffile##*.} ${src-block}/bin/src-block<ret>' -docstring 'expand source blocks'
+    map global user '[' '|SB_STYLE=''${kak_buffile##*.} ${src-block}/bin/src-block<ret>' -docstring 'expand source blocks'
+    map global user ']' '|SB_STYLE=''${kak_buffile##*.} ${src-block}/bin/src-block -d<ret>' -docstring 'unexpand source blocks'
   '')
 ]
