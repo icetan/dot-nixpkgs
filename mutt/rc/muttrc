@@ -92,10 +92,12 @@ set indent_str="> "
 # SMTP
 set use_from = yes
 set envelope_from = yes
-set sendmail = ~/.nix-profile/bin/msmtp
+set sendmail = msmtp
+set send_charset="utf-8"
 
 # mu integration
 set query_command = "mu cfind --format=mutt-ab '%s'"  # Query contacts from mu
+bind editor <tab> complete-query
 
 #set smtp_url=smtp://$imap_user:$imap_pass@smtp.office365.com:587/
 #set ssl_force_tls = yes

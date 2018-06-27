@@ -1,4 +1,6 @@
-{ neomutt, runCommand, writeText, makeWrapper, lib }:
+{ neomutt, msmtp, isync, mu, gnupg, gettext, my-mail-utils
+, runCommand, writeText, makeWrapper, lib
+}:
 
 # TODO: multi account support for mutt.
 account:
@@ -27,6 +29,9 @@ let
   '';
 in runCommand "mutt-wrapper" { buildInputs = [ makeWrapper ]; } ''
   makeWrapper ${neomutt}/bin/neomutt $out/bin/neomutt \
-    --add-flags '-F ${muttrc}'
+    --add-flags '-F ${muttrc}' \
+    --prefix PATH : ${lib.makeBinPath [
+      msmtp isync mu gnupg gettext my-mail-utils
+    ]}
   ln -s ${neomutt}/share $out
 ''

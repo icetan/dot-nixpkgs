@@ -10,7 +10,11 @@
       ++ (optional (defaultOutlookAccount != null) (myMutt defaultOutlookAccount))
     ;
 
-    myMutt = callPackage (import ../mutt) {};
+    myMutt = callPackage (import ../mutt) {
+      isync = myIsync;
+      msmtp = myMsmtp;
+      my-mail-utils = utils;
+    };
 
     myKhal = callPackage (import ../khal.nix) {};
     khalFormat = "{start-end-time-style}{repeat-symbol} {title} @ {location}{description-separator}{description}";
