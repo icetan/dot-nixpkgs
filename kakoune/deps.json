@@ -8,9 +8,9 @@
   },
   "easymotion-src": {
     "url": "git://github.com/danr/kakoune-easymotion",
-    "rev": "481755da9c7be56e0c55390c700e491fd5fc56e0",
-    "date": "2018-05-25T11:30:14+03:00",
-    "sha256": "02zgb6q1fbs48lafya0s7yzv4g88b2j8nzr0nlff752vjiafaa6p",
+    "rev": "0c92d19a9181c14975d47fe681f21fcdf626a6fb",
+    "date": "2018-06-20T13:35:32+03:00",
+    "sha256": "12m3ynhcmkwpj195hp82jnvc4yb1l0b3xqah944j6xlzcvqdj28i",
     "fetchSubmodules": true
   },
   "ecmascript-src": {
@@ -36,16 +36,16 @@
   },
   "kakoune": {
     "url": "https://github.com/mawww/kakoune.git",
-    "rev": "665d3fa196f4df905ebd682965adf78d80eaf8a8",
-    "date": "2018-06-13T07:11:03+10:00",
-    "sha256": "0l0v0spp40a032hf2lqc08rzbsdgqzvwyxs27bg0nbr2nxj9r6hc",
+    "rev": "7591924f853eb0a7bd6a6466a2127a2676fe9b87",
+    "date": "2018-06-20T20:20:50+10:00",
+    "sha256": "1c0jvs4n2rd7brh6ajnck6bnihnr0qfbrssghal7zdsmyjxlwpzk",
     "fetchSubmodules": true
   },
   "kakoune-icetan": {
     "url": "https://github.com/icetan/kakoune.git",
-    "rev": "fb1274010f9497a1312415a63210a64f1e543c9a",
-    "date": "2018-06-13T00:38:39+02:00",
-    "sha256": "15zvlzaxzhky12j0bpa8y8sl4lb8jz5jwpk82v2z15k43b5v398k",
+    "rev": "4af133eae96c71c1e195a35a5e17552dac3770b5",
+    "date": "2018-06-20T13:36:17+02:00",
+    "sha256": "1l90v80rw4l827rgxznd8myhry79b73skbyks3w5375cr3fw6scd",
     "fetchSubmodules": true
   }
 }
