@@ -36,16 +36,16 @@
   },
   "kakoune": {
     "url": "https://github.com/mawww/kakoune.git",
-    "rev": "7591924f853eb0a7bd6a6466a2127a2676fe9b87",
-    "date": "2018-06-20T20:20:50+10:00",
-    "sha256": "1c0jvs4n2rd7brh6ajnck6bnihnr0qfbrssghal7zdsmyjxlwpzk",
+    "rev": "2659912220251d3db9156ac39912f92d9aca878d",
+    "date": "2018-07-08T21:02:51+10:00",
+    "sha256": "0bagwrswqsf1331ss3wi5mvhbxn2h3ipsl325qy5sjg2za2m98ln",
     "fetchSubmodules": true
   },
   "kakoune-icetan": {
     "url": "https://github.com/icetan/kakoune.git",
-    "rev": "4af133eae96c71c1e195a35a5e17552dac3770b5",
-    "date": "2018-06-20T13:36:17+02:00",
-    "sha256": "1l90v80rw4l827rgxznd8myhry79b73skbyks3w5375cr3fw6scd",
+    "rev": "cb8270feaad8c31ca1baa35c65b500d4237a9736",
+    "date": "2018-07-09T14:20:52+02:00",
+    "sha256": "1gw2gjqa9cik3fxwf9rbf22dm2lr1hlxmx3sv2kr09ix5mv42fsi",
     "fetchSubmodules": true
   }
 }

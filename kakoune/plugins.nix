@@ -23,23 +23,23 @@ in [
 #      global user l :easy-motion-line<ret>
 #  '')
 
-  #set window lintcmd '$eslint --format=${eslint-formatter-src}'
-  (writeText "ecmascript.kak" ''
-    source ${fetch ecmascript-src}/ecmascript.kak
-
-    hook global WinSetOption filetype=ecmascript %{
-      #set window formatcmd 'prettier --stdin --semi false --single-quote --jsx-bracket-same-line --trailing-comma all'
-
-      eval %{ %sh{
-        eslint="`${rtrav}/bin/rtrav node_modules/.bin/eslint $PWD && printf %s /node_modules/.bin/eslint || printf %s eslint`"
-        tmpfile="`dirname $kak_val_buffile || echo $PWD`/__tmp.js"
-        printf %s "
-          set window formatcmd 'cat > $tmpfile; $eslint --fix $tmpfile 2>&1 > /dev/null; cat $tmpfile; rm $tmpfile'
-        ";
-      }}
-      lint-enable
-    }
-  '')
+#  set window lintcmd '$eslint --format=${eslint-formatter-src}'
+#  (writeText "ecmascript.kak" ''
+#    source ${fetch ecmascript-src}/ecmascript.kak
+#
+#    hook global WinSetOption filetype=ecmascript %{
+#      #set window formatcmd 'prettier --stdin --semi false --single-quote --jsx-bracket-same-line --trailing-comma all'
+#
+#      eval %{ %sh{
+#        eslint="`${rtrav}/bin/rtrav node_modules/.bin/eslint $PWD && printf %s /node_modules/.bin/eslint || printf %s eslint`"
+#        tmpfile="`dirname $kak_val_buffile || echo $PWD`/__tmp.js"
+#        printf %s "
+#          set window formatcmd 'cat > $tmpfile; $eslint --fix $tmpfile 2>&1 > /dev/null; cat $tmpfile; rm $tmpfile'
+#        ";
+#      }}
+#      lint-enable
+#    }
+#  '')
 
   (writeText "flow.kak" ''
     source ${fetch flow-src}/flow.kak

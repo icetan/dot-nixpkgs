@@ -35,7 +35,6 @@ mu %{ %sh{
 
 
 hook -group mu-highlight global WinSetOption filetype=mu %{
-    add-highlighter window/ group mu
     add-highlighter window/mu regex "^\[(.+?)\]" 1:cyan
     add-highlighter window/mu line %{%opt{mu_current_line}} default+b
 }
