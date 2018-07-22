@@ -62,7 +62,7 @@ in local {
         ];
       };
 
-      baseEnv = buildEnv {
+      baseEnv = setPrio 1 (buildEnv {
         name = "base-env";
         ignoreCollisions = true;
         paths = [
@@ -76,6 +76,7 @@ in local {
           ripgrep
           jq
           qrencode
+          paperkey
           rclone
 
           pass
@@ -85,7 +86,7 @@ in local {
           aspellDicts.en
           aspellDicts.sv
         ];
-      };
+      });
 
       guiEnv = buildEnv {
         name = "gui-env";

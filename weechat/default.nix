@@ -38,7 +38,7 @@
 
   conf-dir = with plugins; runCommand "conf-dir" {} ''
     mkdir -p $out/{python,lua}/autoload
-    cp ${./conf}/* $out/
+    ln -s ${./conf}/* $out/
 
     ln -s ${wee-slack}/wee_slack.py ${go} ${colorize-nicks} ${emoji-aliases} \
       ${beep} \
@@ -62,6 +62,7 @@
     guileSupport = false;
     rubySupport = false;
     tclSupport = false;
+    perlSupport = false;
     extraBuildInputs = [
       luaPackages.cjson
     ];
