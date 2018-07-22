@@ -55,7 +55,7 @@
     export LUA_PATH="${getLuaPath cjson}"
     export WEECHAT_HOME="$HOME/.weechat"
     ln -fs ${conf-dir}/* "$WEECHAT_HOME"
-    exec ${weechat'}/bin/weechat-2.1 "$@"
+    exec ${weechat'}/bin/weechat "$@"
   '';
 
   weechat' = weechat.override {

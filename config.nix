@@ -95,10 +95,12 @@ in local {
           rofi-pass
           xsel
           maim
-          #nitrogen
           xautolock
+          i3status-rust
+
           #termite
           #compton
+          #nitrogen
         ];
       };
     } // util // java;
