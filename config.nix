@@ -37,7 +37,7 @@ in local {
     self = rec {
       bashEnv = callPackage (import ./bash.nix) {};
 
-      myNeovim = callPackage (import ./vim) {};
+      #myNeovim = callPackage (import ./vim) {};
 
       myKakoune = callPackage (import ./kakoune) {};
 

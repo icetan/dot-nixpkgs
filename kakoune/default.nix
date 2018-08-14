@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }: with pkgs;
 
 let
-  git-src = (lib.importJSON ./deps.json).kakoune-icetan;
+  git-src = (lib.importJSON ./deps.json).kakoune;
   kakoune-git = kakoune.overrideDerivation (oldAttr: {
     src = fetchgit { inherit (git-src) url rev sha256 fetchSubmodules; };
     name = "kakoune-git-${lib.substring 0 10 git-src.date}";
