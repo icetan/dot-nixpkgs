@@ -17,7 +17,7 @@
     };
 
     myKhal = callPackage (import ../khal.nix) {};
-    khalFormat = "{start-end-time-style}{repeat-symbol} {title} @ {location}{description-separator}{description}";
+    khalFormat = "» {start-end-time-style}{repeat-symbol} {title} @ {location}{description-separator}{description}";
 
     myIsync = (callPackage (import ../isync) {}) accounts;
 
@@ -26,7 +26,7 @@
     util-scripts = rec {
       mail-sync = writeScript "mail-sync" ''
         #!${dash}/bin/dash
-        set -e
+        #set -e
         to_sync="''${1-${concatMapStringsSep " " (a: a.name) accounts}}"
         sync_account() {
           case "$1" in
@@ -80,7 +80,7 @@
 
       agenda = writeScript "kagenda" ''
         #!${dash}/bin/dash
-        watch -n 300 -ct '${calendar-sync}; ${myKhal}/bin/khal --color list --format "${khalFormat}" today ''${1:-20} days'
+        watch -n 300 -ct '${calendar-sync}; ${myKhal}/bin/khal --color list --format "${khalFormat}" today ''${1:-20} days | fold -s'
       '';
     };
 
