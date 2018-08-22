@@ -13,6 +13,9 @@
     wl = worktree list
     wa = worktree add
     wp = worktree prune
+
+    todo = "!f() { rg --files-with-matches ${1-TODO} | xargs -L1 git blame -e -- | grep `git config user.email` | grep ${1-TODO} -A2; }; f"
+
 [rebase]
     autoSquash = true
 [rerere]
