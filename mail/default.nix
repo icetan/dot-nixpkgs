@@ -80,7 +80,7 @@
 
       agenda = writeScript "kagenda" ''
         #!${dash}/bin/dash
-        watch -n 300 -ct '${calendar-sync}; ${myKhal}/bin/khal --color list --format "${khalFormat}" today ''${1:-20} days | fold -s'
+        watch -n 300 -ct '${myKhal}/bin/khal --color list --format "${khalFormat}" today ''${1:-20} days | fold -s; ${calendar-sync} >/dev/null 2>&1 &'
       '';
     };
 
