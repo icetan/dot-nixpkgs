@@ -9,7 +9,7 @@ a,<lt>,<gt>: angle block
 <space>: space
 c: custom
 d,<del>,<backspace>: delete}
-  on-key %{exec %sh{
+  on-key %{ exec %sh{
     code=0
     case $kak_key in
       'b'|'('|')')               first='(' last=')';;
@@ -38,7 +38,7 @@ def -params 1..2 \
   -docstring %{surround <before> [<after>]: Add <before> before selections
 If <after> is provided: add <after> after selections
 else: add <before> after selections} \
-surround %{exec -draft %sh{
+surround %{ exec -draft %sh{
   printf '%s' "<Z>i$1<esc>a${2-$1}<esc><z>"
 }}
 

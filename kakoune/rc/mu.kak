@@ -8,7 +8,7 @@ decl -hidden int mu_current_line 0
 def -params .. \
   -docstring %{mu [<arguments>]: mu utility wrapper
 All the optional arguments are forwarded to the mu utility} \
-mu %{ %sh{
+mu %{ eval %sh{
     alias linebuf='stdbuf -eL -oL'
     output=$(mktemp -d "${TMPDIR:-/tmp}"/kak-mu.XXXXXXXX)/fifo
     mkfifo ${output}
@@ -91,7 +91,7 @@ decl -docstring "shell command run to view an e-mail" \
 
 def -params .. -file-completion \
     -docstring %{mu-view <msgfile>: view an e-mail} \
-mu-view %{ %sh{
+mu-view %{ eval %sh{
   outdir=$(mktemp -d "${TMPDIR:-/tmp}"/kak-mu.XXXXXXXX)
   partdir=${outdir}/parts
   output=${outdir}/out

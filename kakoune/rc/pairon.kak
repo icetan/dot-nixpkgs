@@ -1,7 +1,7 @@
 def -docstring %{autosave-enable: enable autosave for this file buffer} \
-autosave-enable %{ %sh{
+autosave-enable %{ eval %sh{
   test -n "${kak_buffile}" \
-    && printf %s\\n 'hook -group autosave buffer NormalIdle .* %{ %sh{
+    && printf %s\\n 'hook -group autosave buffer NormalIdle .* %{ eval %sh{
       test "${kak_modified}" = "true" && echo "exec -save-regs : :w<ret>"
     }}'
 }}
@@ -17,7 +17,7 @@ pairon-sync %{ %sh{
 }}
 
 def -docstring %{pairon-listen: start a pairon listener in current directory} \
-pairon-listen %{ %sh{
+pairon-listen %{ eval %sh{
     output=$(mktemp -d "${TMPDIR:-/tmp}"/kak-pairon.XXXXXXXX)/fifo
     mkfifo ${output}
     ( pairon listen > ${output} 2>&1 ) > /dev/null 2>&1 < /dev/null &
