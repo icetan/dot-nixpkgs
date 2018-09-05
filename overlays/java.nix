@@ -1,4 +1,4 @@
-{ pkgs }: with pkgs; let
+self: super: with super; let
   androidsdk' = androidenv.androidsdk {
     platformVersions = [ "7" "25" ]; # Anything between 2 - 23
     abiVersions = [ "x86_64" ]; # Also possible: x86, mips, x86_64, armeabi-v7a

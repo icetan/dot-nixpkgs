@@ -1,4 +1,4 @@
-{ pkgs }: with pkgs;
+self: super: with super;
 
 lib.mapAttrs (name: script:
   runCommand name { buildInputs = [ perl ]; } ''
@@ -36,5 +36,5 @@ lib.mapAttrs (name: script:
     rtrav_ $@
   '';
 
-  src-block = ./src-block;
+  src-block = ../util/src-block;
 }
