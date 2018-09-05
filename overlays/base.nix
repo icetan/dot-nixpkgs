@@ -1,14 +1,12 @@
 self: super: with super; let
   setPrio = num: drv: self.lib.addMetaAttrs { priority = num; } drv;
 in rec {
-  my-kakoune = callPackage (import ../kakoune) {};
   my-weechat = callPackage (import ../weechat) {};
   bash-env = callPackage (import ../bash.nix) {};
   my-git = (callPackage (import ../git) {}) {
     extraConf = ~/.local/gitconfig;
     excludesFile = git/gitignore;
   };
-  my-tmux = callPackage (import ../tmux) {};
   mail-env = callPackage (import ../mail) {};
   chat-env = self.buildEnv {
     name = "chat-env";
@@ -22,8 +20,9 @@ in rec {
     name = "base-env";
     ignoreCollisions = true;
     paths = [
-      my-tmux
-      my-kakoune
+      self.kakoune-plugins
+      self.tmux-custom
+      self.tmux-share
       my-git
 
       gitAndTools.hub

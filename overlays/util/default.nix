@@ -36,5 +36,5 @@ lib.mapAttrs (name: script:
     rtrav_ $@
   '';
 
-  src-block = ../util/src-block;
+  src-block = ./src-block;
 }

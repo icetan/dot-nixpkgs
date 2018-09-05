@@ -1,6 +1,6 @@
 { kakoune, runCommand, writeText, makeWrapper, lib, stdenv }:
 
-{ deps, name ? "kakoune-custom" }: let
+{ deps, name ? kakoune.name }: let
   kakrc = writeText "kakrc" (lib.concatMapStrings (fn: ''
     source ${fn}
   '') deps);
