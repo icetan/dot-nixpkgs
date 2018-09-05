@@ -7,7 +7,7 @@ hook global InsertChar \t %{
 def -hidden insert-bs %{
     try %{
         # delete indentwidth spaces before cursor
-        exec -draft -no-hooks h %opt{indentwidth}H <a-k>\A<space>+\Z<ret> d
+        exec -draft h %opt{indentwidth}HL <a-k>\A<space>+\z<ret> d
     } catch %{
         exec <backspace>
     }

@@ -1,5 +1,5 @@
 hook global NormalKey y|d|c %{ nop %sh{
-  printf %s "$kak_reg_dquote" | xsel --input --clipboard
+  printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
 }}
 
 map -docstring 'append from system clipboard' \
