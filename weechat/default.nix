@@ -1,15 +1,19 @@
 { lib, stdenv, runCommand, makeWrapper, writeScript
 , luaPackages, pythonPackages, fetchgit, fetchurl
-, weechat-matrix-bridge, weechat
+, weechat-matrix-bridge, weechat, signal-cli
 }: let
   inherit (builtins) readFile;
 
+  deps = (lib.importJSON ./deps.json);
+  fetchdep = dep: fetchgit { inherit (dep) url rev sha256 fetchSubmodules; };
+
   plugins = {
-    wee-slack = fetchgit {
-      url = "https://github.com/wee-slack/wee-slack.git";
-      rev = "v2.0.0";
-      sha256 = "0712zzscgylprnnpgy2vr35a5mdqhic8kag5v3skhd84awbvk1n5";
-    };
+    wee-slack = fetchdep deps.wee-slack;
+    #wee-slack = fetchgit {
+    #  url = "https://github.com/wee-slack/wee-slack.git";
+    #  rev = "v2.0.0";
+    #  sha256 = "0712zzscgylprnnpgy2vr35a5mdqhic8kag5v3skhd84awbvk1n5";
+    #};
 
     go = ./plugins/go.py;
     #fetchurl {
@@ -34,6 +38,8 @@
     #  url = "https://weechat.org/files/scripts/unofficial/beep.py";
     #  sha256 = "0wh2cmsajjks5pblrzvqhxkfqvbzv14lxf2gg447lhp7q9gyp9k9";
     #};
+
+    signal = fetchdep deps.signal-weechat;
   };
 
   conf-dir = with plugins; runCommand "conf-dir" {} ''
@@ -41,7 +47,7 @@
     ln -s ${./conf}/* $out/
 
     ln -s ${wee-slack}/wee_slack.py ${go} ${colorize-nicks} ${emoji-aliases} \
-      ${beep} \
+      ${beep} ${signal}/signal.py \
       $out/python/autoload/
 
     ln -s ${weechat-matrix-bridge}/share/matrix.lua \
@@ -50,6 +56,7 @@
 
   weechat-wrapper = with luaPackages; writeScript "weechat-wrapper" ''
     #!${stdenv.shell}
+    export PATH="${signal-cli}/bin:$PATH"
     export ASPELL_CONF="data-dir $HOME/.nix-profile/lib/aspell"
     export LUA_CPATH="${getLuaCPath cjson}"
     export LUA_PATH="${getLuaPath cjson}"
@@ -69,7 +76,10 @@
     configure = {availablePlugins,...}: {
       plugins = with availablePlugins; [
         lua
-        (python.withPackages (ps: with ps; [websocket_client xmpppy]))
+        (python.withPackages (ps: with ps; [
+          websocket_client xmpppy
+          dbus-python qrcode  # used by signal plugin
+        ]))
       ];
     };
   };
