@@ -41,9 +41,9 @@ in [
 #    }
 #  '')
 
-  (writeText "flow.kak" ''
-    source ${fetch flow-src}/flow.kak
-  '')
+#  (writeText "flow.kak" ''
+#    source ${fetch flow-src}/flow.kak
+#  '')
 
   (writeText "cd.kak" ''
     source ${fetch cd-src}/cd.kak
@@ -71,5 +71,6 @@ in [
 
   (writeText "kak-lsp.kak" ''
     eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
+    nop %sh{ (${kak-lsp}/bin/kak-lsp -s $kak_session -vvv ) > /tmp/kak-lsp.log 2>&1 < /dev/null & }
   '')
 ]
