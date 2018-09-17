@@ -1,9 +1,9 @@
-{ writeText, fetchgit, rtrav, src-block, lib, ripgrep }: let
+{ writeText, fetchgit, rtrav, src-block, lib, ripgrep, kak-lsp }: let
   inherit (builtins) readFile fromJSON elem;
   inherit (lib) filterAttrs;
 
   deps = fromJSON (readFile ./deps.json);
-  fetch = src: fetchgit (filterAttrs (k: v: elem k ["url" "rev" "sha256"]) src);
+  fetch = src: fetchgit { inherit (src) url rev sha256 fetchSubmodules; };
 
   inherit (deps)
     #easymotion-src
@@ -67,5 +67,9 @@ in [
   (writeText "src-block.kak" ''
     map global user '[' '|SB_STYLE=''${kak_buffile##*.} ${src-block}/bin/src-block<ret>' -docstring 'expand source blocks'
     map global user ']' '|SB_STYLE=''${kak_buffile##*.} ${src-block}/bin/src-block -d<ret>' -docstring 'unexpand source blocks'
+  '')
+
+  (writeText "kak-lsp.kak" ''
+    eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
   '')
 ]
