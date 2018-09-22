@@ -7,12 +7,20 @@ rec {
       [language.typescript]
       extensions = ["ts", "tsx"]
       roots = ["tsconfig.json", "package.json"]
-      command = "${nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio"
+      command = "javascript-typescript-stdio"
 
       [language.java]
       extensions = ["java"]
       roots = ["pom.xml"]
-      command = "${javacs}/bin/javacs"
+      command = "javacs"
+
+      [language.scala]
+      extensions = ["scala", "sbt"]
+      roots = ["build.sbt"]
+      command = "coursier"
+      args = ["launch", "-r", "bintray:scalameta/maven", "org.scalameta:metals_2.12:0.1.0-M1+262-5e24738b", "-M", "scala.meta.metals.Main"]
     '';
+    # ${nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio
+    # ${javacs}/bin/javacs
   };
 }
