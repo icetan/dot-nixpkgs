@@ -129,7 +129,7 @@ mu-view %{ eval %sh{
 }}
 
 def mu-cfind -docstring 'mu-cfind <contact>: ' \
-  -params 1 -shell-candidates %{ mu cfind --format=csv | sed 's/,/ </;s/$/>/' } %{
+  -params 1 -shell-script-candidates %{ mu cfind --format=csv | sed 's/,/ </;s/$/>/' } %{
   reg '"' %arg{1}
   exec '!printf %s "$kak_reg_dquote"<ret>'
 }

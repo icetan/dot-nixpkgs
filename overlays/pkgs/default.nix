@@ -19,6 +19,11 @@ rec {
       roots = ["build.sbt"]
       command = "coursier"
       args = ["launch", "-r", "bintray:scalameta/maven", "org.scalameta:metals_2.12:0.1.0-M1+262-5e24738b", "-M", "scala.meta.metals.Main"]
+
+      [language.elm]
+      extensions = ["elm"]
+      roots = ["elm.json"]
+      command = "elm-language-server"
     '';
     # ${nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio
     # ${javacs}/bin/javacs

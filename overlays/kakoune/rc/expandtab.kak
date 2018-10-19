@@ -1,14 +1,16 @@
-map global insert <backspace> '<a-;>:insert-bs<ret>'
-
-hook global InsertChar \t %{
-    exec -draft h@
+define-command noexpandtab %{
+    hook -group noexpandtab global NormalKey <gt> %{
+        execute-keys -draft "xs^\h+<ret><a-@>"
+    }
+    remove-hooks global expandtab
 }
 
-def -hidden insert-bs %{
-    try %{
-        # delete indentwidth spaces before cursor
-        exec -draft h %opt{indentwidth}HL <a-k>\A<space>+\z<ret> d
-    } catch %{
-        exec <backspace>
+define-command expandtab %{
+    hook -group expandtab global InsertChar \t %{
+        execute-keys -draft h@
     }
+    hook -group expandtab global InsertDelete ' ' %{ try %{
+        execute-keys -draft 'h<a-h><a-k>\A\h+\z<ret>i<space><esc><lt>'
+    }}
+    remove-hooks global noexpandtab
 }

@@ -22,7 +22,7 @@ in {
       ./rc/linenr.kak
       ./rc/search.kak
       ./rc/xsel.kak
-      ./rc/expandtab.kak
+      ./rc/expandtab.kak (writeText "expandtab-enable.kak" "expandtab")
       ./rc/fzf.kak
       ./rc/git-edit.kak
       ./rc/auto-mkdir.kak
