@@ -5,7 +5,7 @@ in rec {
   bash-env = callPackage (import ../bash.nix) {};
   my-git = (callPackage (import ../git) {}) {
     extraConf = ~/.local/gitconfig;
-    excludesFile = git/gitignore;
+    excludesFile = ../git/gitignore;
   };
   mail-env = callPackage (import ../mail) {};
   chat-env = self.buildEnv {
