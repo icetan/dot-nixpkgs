@@ -32,7 +32,13 @@ in {
       ./rc/ft/xml.kak
 
       ./rc/mu.kak
-      ./rc/pairon.kak (writeText "pairon-enable.kak" "pairon-global-enable")
+
+      (writeText "pairon.kak" ''
+        ${builtins.readFile "${self.pairon}/src/editor-plugins/kakoune/pairon.kak"}
+
+        pairon-global-enable
+      '')
     ] ++ plugins;
+    binDeps = [ self.pairon ];
   };
 }
