@@ -22,9 +22,9 @@
   },
   "eslint-formatter-src": {
     "url": "git://github.com/Delapouite/eslint-formatter-kakoune",
-    "rev": "2b93fc5df481be396192b0f56c28d8c29ed1c922",
-    "date": "2017-07-02T14:29:33+02:00",
-    "sha256": "05gr1qf22l71n6sgkibxmfgnc42yxdcla7j6bag0f9rbzc4l6lvb",
+    "rev": "910ecf922d17a3f373e4f6cb441b4ec52c3ba035",
+    "date": "2018-10-27T14:13:46+02:00",
+    "sha256": "02i67xcmw4z101r25sgwiyqjif25yd0i1bfmgz5vmd2vhfl4jdc3",
     "fetchSubmodules": false
   },
   "flow-src": {
@@ -36,9 +36,9 @@
   },
   "kakoune": {
     "url": "https://github.com/mawww/kakoune.git",
-    "rev": "da13b5f8143a3809bb938c020b957e1c5ff8dae7",
-    "date": "2018-10-15T21:21:12+11:00",
-    "sha256": "1vhj4a6f1r2q8k6fm84vi3ws63x0ra0lxi9gpf76i3w8jk92anpd",
+    "rev": "3b40ab82f44afcdcda70b1162b5b130fadb22bdc",
+    "date": "2018-10-27T09:26:50+11:00",
+    "sha256": "1w7jmq57h8gxxbzg0n3lgd6cci77xb9mziy6lr8330nzqc85zp9p",
     "fetchSubmodules": false
   },
   "kakoune-icetan": {

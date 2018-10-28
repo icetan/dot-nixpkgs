@@ -1,10 +1,12 @@
 self: super: with super;
 
 let
+  inherit (lib) substring replaceStrings;
   git-src = (lib.importJSON ./deps.json).kakoune;
-  kakoune-git = kakoune.overrideDerivation (oldAttr: {
+  kakoune-git = kakoune.overrideDerivation (oldAttr: rec {
     src = fetchgit { inherit (git-src) url rev sha256 fetchSubmodules; };
-    name = "kakoune-git-${lib.substring 0 10 git-src.date}";
+    version = "v${replaceStrings ["-"] ["."] (substring 0 10 git-src.date)}";
+    name = "kakoune-git-${version}";
     buildInputs = oldAttr.buildInputs ++ [ pkgconfig ];
   });
   kakix = callPackage (import ./kakix.nix) { kakoune = kakoune-git; };
@@ -33,11 +35,8 @@ in {
 
       ./rc/mu.kak
 
-      (writeText "pairon.kak" ''
-        ${builtins.readFile "${self.pairon}/src/editor-plugins/kakoune/pairon.kak"}
-
-        pairon-global-enable
-      '')
+      "${self.pairon}/src/editor-plugins/kakoune/pairon.kak"
+      (writeText "pairon-enable.kak" "pairon-global-enable")
     ] ++ plugins;
     binDeps = [ self.pairon ];
   };
