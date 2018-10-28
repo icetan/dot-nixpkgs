@@ -1,13 +1,15 @@
 self: super: with super;
 
-lib.mapAttrs (name: script:
-  runCommand name { buildInputs = [ perl ]; } ''
-    mkdir -p $out/bin
-    cp ${script} $out/bin/${name}
-    patchShebangs $out/bin
-  ''
-) {
-  update-deps = writeScript "update-deps" ''
+let
+  mkBin = { name, script, buildInputs ? [] }:
+    runCommand name { inherit buildInputs; } ''
+      mkdir -p $out/bin
+      cp ${script} $out/bin/${name}
+      chmod +x $out/bin/${name}
+      patchShebangs $out/bin
+    '';
+in {
+  update-deps = writeScriptBin "update-deps" ''
     #!${dash}/bin/dash
     set -e
 
@@ -27,14 +29,18 @@ lib.mapAttrs (name: script:
     fi
   '';
 
-  rtrav = writeScript "rtrav" ''
+  rtrav = writeScriptBin "rtrav" ''
     #!${dash}/bin/dash
     set -e
     rtrav_() {
-      test -e $2/$1 && printf %s "$2" || { test $2 != / && rtrav_ $1 `dirname $2`; }
+      test -e "$2/$1" && printf %s "$2" || { test "$2" != / && rtrav_ "$1" "$(dirname $2)"; }
     }
     rtrav_ $@
   '';
 
-  src-block = ./src-block;
+  src-block = mkBin {
+    name = "src-block";
+    script = ./src-block;
+    buildInputs = [ perl ];
+  };
 }
