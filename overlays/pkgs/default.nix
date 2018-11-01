@@ -37,8 +37,8 @@ rec {
   pairon = callPackage (import (fetchFromGitHub {
     owner = "icetan";
     repo = "pairon";
-    rev = "c64c748cc649271119a4d8f714e7658800211eb1";
-    sha256 = "1l6vqy1rgmfyryh4lm7vs13c4qi7lnm9cglq1x4mkksvy6g0dfvn";
+    rev = "0f4171b4d180bfd8282f0a3e4529392d05e85c7f";
+    sha256 = "04mbwzz2pblhi1m8nci723jjncky7n6x4y159si8bxw43m35yjdl";
   })) {};
 
   nix-lsp = import (fetchFromGitLab {
