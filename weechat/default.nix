@@ -44,9 +44,11 @@
 
   conf-dir = with plugins; runCommand "conf-dir" {} ''
     mkdir -p $out/{python,lua}/autoload
-    ln -s ${./conf}/* $out/
 
-    ln -s ${wee-slack}/wee_slack.py ${go} ${colorize-nicks} ${emoji-aliases} \
+    ln -s ${./conf}/* ${wee-slack}/weemoji.json \
+      $out/
+
+    ln -s ${wee-slack}/wee_slack.py ${go} ${colorize-nicks} \
       ${beep} ${signal}/signal.py \
       $out/python/autoload/
 
