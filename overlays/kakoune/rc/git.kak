@@ -24,7 +24,7 @@ auto-git-show-disable %{
 def -docstring %{auto-git-show-enable: enable showing git diff gutter on buffer
 write} \
 auto-git-show-global-enable %{
-  hook -group auto-git global BufCreate .* auto-git-show-enable
+  hook -group auto-git global BufOpenFile .* auto-git-show-enable
   eval -buffer %sh{ echo "${kak_buflist}" | sed "s/'//g;s/ /,/g" } %{
     auto-git-show-enable
   }
