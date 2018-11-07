@@ -74,6 +74,6 @@ in [
 
     # Start debug logging
     # (removing this stops javacs from working for some reason)
-    nop %sh{ (${kak-lsp}/bin/kak-lsp -s $kak_session -vvv ) > /tmp/kak-lsp.log 2>&1 < /dev/null & }
+    nop %sh{ (${kak-lsp}/bin/kak-lsp -s $kak_session -vvv ) > /tmp/kak-lsp.$kak_session.log 2>&1 < /dev/null & }
   '')
 ]
