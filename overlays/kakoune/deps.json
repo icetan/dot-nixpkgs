@@ -36,9 +36,9 @@
   },
   "kakoune": {
     "url": "https://github.com/mawww/kakoune.git",
-    "rev": "3b40ab82f44afcdcda70b1162b5b130fadb22bdc",
-    "date": "2018-10-27T09:26:50+11:00",
-    "sha256": "1w7jmq57h8gxxbzg0n3lgd6cci77xb9mziy6lr8330nzqc85zp9p",
+    "rev": "8c2c3d27add5b4eea9ad6d3d52fa1e0d5f7f0974",
+    "date": "2018-11-07T12:28:41+11:00",
+    "sha256": "1yxp7pvnkxzhw45lq3qz21jg5hlf84xmqvcifijpcc72a42zq5g7",
     "fetchSubmodules": false
   },
   "kakoune-icetan": {
