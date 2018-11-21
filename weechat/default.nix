@@ -1,4 +1,4 @@
-{ lib, stdenv, runCommand, makeWrapper, writeScript
+{ lib, stdenv, runCommand, makeWrapper, writeScriptBin
 , luaPackages, pythonPackages, fetchgit, fetchurl
 , weechat-matrix-bridge, weechat, signal-cli
 }: let
@@ -45,25 +45,27 @@
   conf-dir = with plugins; runCommand "conf-dir" {} ''
     mkdir -p $out/{python,lua}/autoload
 
-    ln -s ${./conf}/* ${wee-slack}/weemoji.json \
+    cp -r ${./conf}/* ${wee-slack}/weemoji.json \
       $out/
 
-    ln -s ${wee-slack}/wee_slack.py ${go} ${colorize-nicks} \
+    cp -r ${wee-slack}/wee_slack.py ${go} ${colorize-nicks} \
       ${beep} ${signal}/signal.py \
       $out/python/autoload/
 
-    ln -s ${weechat-matrix-bridge}/share/matrix.lua \
+    cp -r ${weechat-matrix-bridge}/share/matrix.lua \
       $out/lua/autoload/
   '';
 
-  weechat-wrapper = with luaPackages; writeScript "weechat-wrapper" ''
+  weechat-wrapper = with luaPackages; writeScriptBin "weechat" ''
     #!${stdenv.shell}
     export PATH="${signal-cli}/bin:$PATH"
     export ASPELL_CONF="data-dir $HOME/.nix-profile/lib/aspell"
     export LUA_CPATH="${getLuaCPath cjson}"
     export LUA_PATH="${getLuaPath cjson}"
     export WEECHAT_HOME="$HOME/.weechat"
-    ln -fs ${conf-dir}/* "$WEECHAT_HOME"
+    mkdir -p "$WEECHAT_HOME"
+    cp -rn ${conf-dir}/* "$WEECHAT_HOME"
+    chmod -R u+w "$WEECHAT_HOME"
     exec ${weechat'}/bin/weechat "$@"
   '';
 
@@ -85,10 +87,7 @@
       ];
     };
   };
-in runCommand "weechat-wrapper" {} ''
-  mkdir -p $out/bin
-  ln -s ${weechat-wrapper} $out/bin/weechat
-''
+in weechat-wrapper
 
 #with luaPackages; runCommand "weechat-wrapper" { buildInputs = [ makeWrapper ]; } ''
 #  makeWrapper ${weechat'}/bin/weechat-2.1 $out/bin/weechat-2.1 \
