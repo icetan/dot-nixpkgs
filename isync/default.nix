@@ -2,6 +2,7 @@
 
 accounts: let
   tmpls = {
+    "generic" = callPackage (import ./generic.nix) {};
     "gmail" = callPackage (import ./gmail.nix) {};
     "outlook" = callPackage (import ./outlook.nix) {};
   };

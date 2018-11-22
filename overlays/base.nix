@@ -2,7 +2,6 @@ self: super: with super; let
   setPrio = num: drv: self.lib.addMetaAttrs { priority = num; } drv;
 in rec {
   my-weechat = callPackage (import ../weechat) {};
-  bash-env = callPackage (import ../bash.nix) {};
   my-git = (callPackage (import ../git) {}) {
     extraConf = ~/.local/gitconfig;
     excludesFile = ../git/gitignore;

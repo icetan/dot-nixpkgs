@@ -1,4 +1,4 @@
-{ cacert, pass }: account@{ name, dir, email, pass-path, ... }: ''
+{ cacert, pass }: { name, root, dir, email, pass-path, ... }: ''
 IMAPAccount ${name}
 # Address to connect to
 Host imap.gmail.com
@@ -13,8 +13,8 @@ Account ${name}
 
 MaildirStore ${name}-local
 # The trailing "/" is important
-Path ${dir}/
-Inbox ${dir}/Inbox
+Path ${root}/${dir}/
+Inbox ${root}/${dir}/Inbox
 
 Channel ${name}
 Master :${name}-remote:

@@ -1,5 +1,5 @@
 # Paths
-set folder           = ~/mail                # mailbox location
+#set folder           = ~/mail                # mailbox location
 #set alias_file       = ~/.mutt/alias         # where to store aliases
 #set certificate_file = ~/.mutt/certificates  # where to store certs
 #set mailcap_path     = ~/.mutt/mailcap       # entries for filetypes
@@ -30,17 +30,6 @@ set pipe_decode          # strip headers and eval mimes when piping
 set thorough_search      # strip headers and eval mimes before searching
 
 set mbox_type=Maildir
-mailboxes +work/Inbox \
-          +work/Archive \
-          +work/Drafts \
-          +work/Sent \
-          +"work/Deleted Items"
-# Other special folders.
-set spoolfile = "+work/Inbox"
-set mbox      = "+work/Archive"
-set postponed = "+work/Drafts"
-set record    = "+work/Inbox" # Should really be "+work/Sent" but to view sent mail in inbox threads
-set trash     = "+work/Deleted Items"
 
 # Header Options
 ignore *                                # ignore all headers
@@ -126,11 +115,6 @@ macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "ma
 
 # Sync email
 macro index,pager O "<shell-escape>mbsync default:INBOX<enter>"           "run sync all inbox"
-
-# Saner copy/move dialogs
-macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
-macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
-macro index,pager Y "<save-message>=work/Archive<enter>" "move a message to archive mailbox"
 
 # Reverse search
 bind index,pager N search-opposite

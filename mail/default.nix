@@ -4,7 +4,7 @@
 
   setAccounts = accounts: let
     defaultOutlookAccount = findFirst
-      (a: (a.type == "outlook") && (a.name == "default")) null accounts;
+      (a: (a.type == "outlook" || a.type == "generic") && (a.name == "default")) null accounts;
 
     optionalPackages = [ ]
       ++ (optional (defaultOutlookAccount != null) (myMutt defaultOutlookAccount))
@@ -33,8 +33,9 @@
             ${concatMapStrings (a: with a; ''
             ${name})
               echo SYNCING ACCOUNT: ${name} '<${email}>'
+              mkdir -p "${root}/${dir}"
               ${myIsync}/bin/mbsync ${name}
-              ${mu}/bin/mu index -m "${dir}" --my-address="${email}"
+              ${mu}/bin/mu index -m "${root}/${dir}" --my-address="${email}"
               ;;
             '') accounts}
             *)
@@ -70,7 +71,7 @@
 
       mail-unread = writeScript "mail-unread" ''
         #!${dash}/bin/dash
-        ${mu}/bin/mu find flag:u >/dev/null 2>&1
+        ${mu}/bin/mu find maildir:/Inbox flag:u >/dev/null 2>&1
       '';
 
       calendar-sync = writeScript "calendar-sync" ''

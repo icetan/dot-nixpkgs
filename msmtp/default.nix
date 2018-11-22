@@ -1,9 +1,23 @@
-{ msmtp, lib, runCommand, makeWrapper, writeText, callPackage }:
+{ msmtp, cacert, pass, lib, runCommand, makeWrapper, writeText, callPackage }:
 
 accounts: let
+  mkCfg = { smtpHost, name, email, pass-path, ... }: ''
+    account ${name}
+    host ${smtpHost}
+    port 587
+    protocol smtp
+    auth on
+    from ${email}
+    user ${email}
+    passwordeval ${pass}/bin/pass show ${pass-path} | head -n1
+    tls on
+    tls_starttls on
+    tls_trust_file ${cacert}/etc/ssl/certs/ca-bundle.crt
+  '';
   tmpls = {
-    "gmail" = callPackage (import ./gmail.nix) {};
-    "outlook" = callPackage (import ./outlook.nix) {};
+    "generic" = mkCfg;
+    "gmail" = account: mkCfg (account // { smtpHost = "smtp.gmail.com"; });
+    "outlook" = account: mkCfg (account // { smtpHost = "smtp.office365.com"; });
   };
   msmtprc = writeText "msmtprc" (lib.concatMapStringsSep ''
 

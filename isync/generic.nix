@@ -1,7 +1,7 @@
-{ cacert, pass }: { name, root, dir, email, pass-path, ... }: ''
+{ cacert, pass }: { imapHost, name, root, dir, email, pass-path, ... }: ''
 IMAPAccount ${name}
 # Address to connect to
-Host outlook.office365.com
+Host ${imapHost}
 User ${email}
 PassCmd "${pass}/bin/pass show ${pass-path} | head -n1"
 # Use SSL
@@ -20,7 +20,7 @@ Channel ${name}
 Master :${name}-remote:
 Slave :${name}-local:
 # Mailboxes to sync
-Patterns "INBOX" "Other" "Archive" "Drafts" "Sent" "Deleted Items"
+Patterns "INBOX" "Archive" "Drafts" "Sent" "Trash" "DeltaChat"
 # Automatically create missing mailboxes, both locally and on the server
 Create Both
 Expunge Both
