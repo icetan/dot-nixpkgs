@@ -75,5 +75,8 @@ in [
     # Start debug logging
     # (removing this stops javacs from working for some reason)
     nop %sh{ (${kak-lsp}/bin/kak-lsp -s $kak_session -vvv; rm -f /tmp/kak-lsp.$kak_session.log) > /tmp/kak-lsp.$kak_session.log 2>&1 < /dev/null & }
+
+    # User key mappings
+    map global user 'h' ':lsp-hover<ret>' -docstring 'show lsp hover'
   '')
 ]
