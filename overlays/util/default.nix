@@ -8,7 +8,7 @@ let
       chmod +x $out/bin/${name}
       patchShebangs $out/bin
     '';
-in {
+in rec {
   update-deps = writeScriptBin "update-deps" ''
     #!${dash}/bin/dash
     set -e
@@ -43,4 +43,14 @@ in {
     script = ./src-block;
     buildInputs = [ perl ];
   };
+
+  scut = writeScriptBin "scut" ''
+    #!${dash}/bin/dash
+    cut -c-$(tput cols)
+  '';
+
+  jwatch = writeScriptBin "jwatch" ''
+    #!${dash}/bin/dash
+    watch -n20 -tc 'echo $(tput bold)'"$2"'$(tput sgr0); echo; ${go-jira}/bin/jira '"$1"' </dev/null | ${scut}/bin/scut'
+  '';
 }
