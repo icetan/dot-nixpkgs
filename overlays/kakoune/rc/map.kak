@@ -9,9 +9,9 @@ map -docstring 'delete buffer' \
 map -docstring 'delete buffer!' \
   global user D :db!<ret>
 map -docstring 'split horizontally' \
-  global user s :tmux-new-horizontal<ret>
+  global user s ':tmux-terminal-horizontal kak -c "%val{session}"<ret>'
 map -docstring 'split vertically' \
-  global user v :tmux-new-vertical<ret>
+  global user v ':tmux-terminal-vertical kak -c "%val{session}"<ret>'
 map -docstring 'format buffer' \
   global user = :format<ret>
 

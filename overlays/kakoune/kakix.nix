@@ -1,4 +1,4 @@
-{ kakoune, runCommand, writeText, makeWrapper, lib, stdenv }:
+{ kakoune, dash, runCommand, writeText, makeWrapper, lib, stdenv }:
 
 { deps, name ? kakoune.name, binDeps ? [] }: let
   kakrc = writeText "kakrc" (lib.concatMapStrings (fn: ''
@@ -11,5 +11,6 @@
 in runCommand name { buildInputs = [ makeWrapper ]; } ''
   makeWrapper ${kakoune}/bin/kak $out/bin/kak \
     --set XDG_CONFIG_HOME ${config-kakrc} \
-    --prefix PATH : ${lib.makeBinPath binDeps}
+    --prefix PATH : ${lib.makeBinPath binDeps} \
+    --set KAKOUNE_POSIX_SHELL ${dash}/bin/dash
 ''
