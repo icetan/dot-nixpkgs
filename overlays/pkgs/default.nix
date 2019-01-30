@@ -1,5 +1,6 @@
 self: super: with super;
 rec {
+  docker-credential-helpers = callPackage (import ./docker-credential-helpers.nix) {};
   signal-cli = callPackage (import ./signal-cli.nix) {};
   javacs = import ./javacs { inherit pkgs; };
   kak-lsp = (callPackage (import ./kak-lsp.nix) {}) {
