@@ -52,6 +52,7 @@ in rec {
       maim
       xautolock
       i3status-rust
+      feh
 
       #termite
       #compton
