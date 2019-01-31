@@ -32,6 +32,7 @@ in {
       ./rc/git.kak (writeText "git-enable.kak" "auto-git-show-global-enable")
 
       ./rc/ft/xml.kak
+      ./rc/ft/markdown.kak
 
       ./rc/mu.kak
 

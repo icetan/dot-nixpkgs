@@ -12,8 +12,8 @@ map -docstring 'split horizontally' \
   global user s ':tmux-terminal-horizontal kak -c "%val{session}"<ret>'
 map -docstring 'split vertically' \
   global user v ':tmux-terminal-vertical kak -c "%val{session}"<ret>'
-map -docstring 'format buffer' \
-  global user = :format<ret>
+map -docstring 'format selection' \
+  global user = '|$kak_opt_formatcmd<ret>'
 
 # Case insensitive search
 map -docstring 'case insensitive search' \

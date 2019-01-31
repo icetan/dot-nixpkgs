@@ -1,33 +1,39 @@
 self: super: with super;
-rec {
+let
+   metals_version = "0.4.0";
+in rec {
   docker-credential-helpers = callPackage (import ./docker-credential-helpers.nix) {};
   signal-cli = callPackage (import ./signal-cli.nix) {};
   javacs = import ./javacs { inherit pkgs; };
-  kak-lsp = (callPackage (import ./kak-lsp.nix) {}) {
+  inherit (callPackage (import ./kak-lsp.nix) {}) kak-lsp;
+  kak-lsp-extra = makeOverridable kak-lsp.override {
     extraConfig = ''
       [language.typescript]
-      extensions = ["ts", "tsx"]
+      filetypes = ["ts", "tsx"]
       roots = ["tsconfig.json", "package.json"]
       command = "javascript-typescript-stdio"
 
       [language.java]
-      extensions = ["java"]
+      filetypes = ["java"]
       roots = ["pom.xml"]
       command = "javacs"
 
       [language.scala]
-      extensions = ["scala", "sbt"]
+      filetypes = ["scala", "sbt"]
       roots = ["build.sbt"]
       command = "coursier"
-      args = ["launch", "-r", "bintray:scalameta/maven", "org.scalameta:metals_2.12:0.1.0-M1+262-5e24738b", "-M", "scala.meta.metals.Main"]
+      args = ["launch"
+             , "-r", "bintray:scalameta/maven"
+             , "org.scalameta:metals_2.12:${metals_version}"
+             , "-M", "scala.meta.metals.Main"]
 
       [language.elm]
-      extensions = ["elm"]
+      filetypes = ["elm"]
       roots = ["elm.json"]
       command = "elm-language-server"
 
       [language.nix]
-      extensions = ["nix"]
+      filetypes = ["nix"]
       roots = [".git", ".hg"]
       command = "nix-lsp"
     '';

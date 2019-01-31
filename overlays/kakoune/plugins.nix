@@ -7,11 +7,12 @@
 
   inherit (deps)
     #easymotion-src
-    ecmascript-src
-    eslint-formatter-src
-    flow-src
+    #ecmascript-src
+    #eslint-formatter-src
+    #flow-src
     cd-src
-    typescript-src;
+    #typescript-src
+    ;
 in [
 #  (writeText "easymotion.kak" ''
 #    source ${fetch easymotion-src}/easymotion.kak
@@ -75,6 +76,8 @@ in [
     # Start debug logging
     # (removing this stops javacs from working for some reason)
     nop %sh{ (${kak-lsp}/bin/kak-lsp -s $kak_session -vvv; rm -f /tmp/kak-lsp.$kak_session.log) > /tmp/kak-lsp.$kak_session.log 2>&1 < /dev/null & }
+
+    lsp-enable
 
     # User key mappings
     map global user 'h' ':lsp-hover<ret>' -docstring 'show lsp hover'
