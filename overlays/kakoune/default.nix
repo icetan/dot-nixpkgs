@@ -33,6 +33,7 @@ in {
 
       ./rc/ft/xml.kak
       ./rc/ft/markdown.kak
+      ./rc/ft/json.kak
 
       ./rc/mu.kak
 
