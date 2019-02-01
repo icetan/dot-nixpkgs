@@ -28,7 +28,7 @@ in rec {
       git-crypt
       tree
       ripgrep
-      jq
+      yq
       qrencode
       paperkey
       rclone
@@ -55,7 +55,6 @@ in rec {
       feh
 
       #termite
-      #compton
       #nitrogen
     ];
   };
