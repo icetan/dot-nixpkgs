@@ -1,16 +1,12 @@
 {
   "mavenix": {
     "url": "https://github.com/icetan/mavenix",
-    "rev": "508fb511d97eca1e003f73dc01a9f461845bf305",
-    "date": "2019-02-03T01:58:17+01:00",
-    "sha256": "0872na809wa8yddi7p9p3ypycdswmski7ppkyxmsjrhn12xnhxf5",
-    "fetchSubmodules": false
+    "rev": "68e64bc48e23b10b97bc48dae93ea87fb2a28f36",
+    "date": "2019-03-11T13:55:21+01:00"
   },
   "mozilla": {
     "url": "https://github.com/mozilla/nixpkgs-mozilla",
-    "rev": "507efc7f62427ded829b770a06dd0e30db0a24fe",
-    "date": "2019-01-25T17:40:39+01:00",
-    "sha256": "17p1krbs6x6rnz59g46rja56b38gcigri3h3x9ikd34cxw77wgs9",
-    "fetchSubmodules": false
+    "rev": "cebceca52d54c3df371c2265903f008c7a72980b",
+    "date": "2019-03-08T13:42:51-05:00"
   }
 }

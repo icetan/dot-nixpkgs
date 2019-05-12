@@ -2,9 +2,10 @@ self: super: with super;
 let
   metals_version = "0.4.0";
   nightly = self.latest.rustChannels.nightly;
-  buildRustPackage = self.rustPlatform.buildRustPackage.override {
+  nightlyBuildRustPackage = self.rustPlatform.buildRustPackage.override {
     inherit (nightly) rustc cargo;
   };
+  buildRustPackage = self.rustPlatform.buildRustPackage;
 in rec {
   docker-credential-helpers = callPackage (import ./docker-credential-helpers.nix) {};
   signal-cli = callPackage (import ./signal-cli.nix) {};
