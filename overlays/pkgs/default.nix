@@ -51,13 +51,11 @@ in rec {
     sha256 = "1kajcsbhhkfj8wp1zcgmlpc6ng5h0nc4s1d0irax20rnr5kmjji8";
   })) {};
 
-  nix-lsp = buildRustPackage {
+  nix-lsp = nightlyBuildRustPackage {
     name = "nix-lsp";
-    src = fetchFromGitLab {
-      owner = "jD91mZM2";
-      repo = "nix-lsp";
+    src = fetchGit {
+      url = "git://github.com/jD91mZM2/nix-lsp";
       rev = "0db95183edf2f6be9bfff23e4a59a721d60628c7";
-      sha256 = "1b5m3ghb4a5pzn4nclzssqs9s3j4ks5nag0nrvlaz8r2ms2pv5qi";
     };
     cargoSha256 = "1n01dzm0ngy1kn42xdmkcc83cxkk9552l5spd5a4ack4s4rdlrm2";
 
