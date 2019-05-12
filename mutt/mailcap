@@ -1,11 +1,6 @@
-text/calendar; mail-view text/calendar /dev/stdin; copiousoutput;
-text/ics;      mail-view text/ics      /dev/stdin; copiousoutput;
+text/*;     mail-view %t %{charset} %s; copiousoutput;
 
-text/html;     mail-view text/html     /dev/stdin; copiousoutput;
+image/*;       $BROWSER %s;
+application/*; $BROWSER %s;
 
-text/*;        $BROWSER '%s';
-image/*;       $BROWSER '%s';
-application/*; $BROWSER '%s';
-
-#text/enriched;  iconv -f %{charset} -t utf-8 | pandoc -f rtf -t plain   ; copiousoutput;
 #image/*;        convert - jpg:- | jp2a --colors -                       ; copiousoutput;

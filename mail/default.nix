@@ -52,19 +52,27 @@
       mail-view = writeScript "mail-view" ''
         #!${dash}/bin/dash
         set -e
+        file=$3
+        enc=$2
+        conv() {
+          iconv -f$(echo "$enc" | tr [:lower:] [:upper:] | tr -d -) -tUTF8 < "$file" | tr -d \\r
+        }
         case "$1" in
           text/html)
-            ${elinks}/bin/elinks -dump -force-html -dump-width 80 < "$2"
+            conv | ${elinks}/bin/elinks -dump -force-html -dump-width 80
             ;;
           text/calendar|text/ics)
-            ${myKhal}/bin/khal printics --format '{start-date} ${khalFormat}' "$2"
+            conv | ${myKhal}/bin/khal printics --format '{start-date} ${khalFormat}' /dev/stdin
+            ;;
+          text/enriched)
+            conv | pandoc -f rtf -t plain
             ;;
           image/*)
             echo "Can't display images"
-            ${feh}/bin/feh "$2" 2> /dev/null &
+            ${feh}/bin/feh "$3" 2> /dev/null &
             ;;
           *)
-            cat "$2"
+            conv | fmt -cs -w 100
             ;;
         esac
       '';

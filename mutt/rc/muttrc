@@ -62,7 +62,7 @@ unset markers              # no ugly plus signs
 
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 alternative_order text/html text/plain text/enriched
-auto_view text/enriched text/html
+auto_view text/enriched text/html text/plain
 
 # Compose View Options
 set envelope_from                    # which from?
