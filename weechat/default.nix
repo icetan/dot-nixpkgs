@@ -7,7 +7,7 @@
   inherit (builtins) readFile;
 
   deps = (lib.importJSON ./deps.json);
-  fetchdep = dep: fetchgit { inherit (dep) url rev sha256 fetchSubmodules; };
+  fetchdep = dep: fetchGit { inherit (dep) url rev; };
 
   plugins = {
     wee-slack = fetchdep deps.wee-slack;
@@ -68,7 +68,7 @@
     # Copy config to ~/.weechat
     export WEECHAT_HOME="$HOME/.weechat"
     mkdir -p "$WEECHAT_HOME"
-    cp -rn ${conf-dir}/* "$WEECHAT_HOME"
+    cp -rn -t "$WEECHAT_HOME" ${conf-dir}/*
     chmod -R u+w "$WEECHAT_HOME"
 
     exec ${weechat'}/bin/weechat "$@"

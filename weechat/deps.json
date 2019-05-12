@@ -2,15 +2,11 @@
   "signal-weechat": {
     "url": "https://github.com/thefinn93/signal-weechat",
     "rev": "983bb2ea91d361825da38a85b2e2e7e06b17abee",
-    "date": "2017-03-13T09:03:10-07:00",
-    "sha256": "1h0z8rz3xb0gz1d3yf4fbryn1h47jvdgsihfrmamhkx6yf69a93x",
-    "fetchSubmodules": true
+    "date": "2017-03-13T09:03:10-07:00"
   },
   "wee-slack": {
     "url": "https://github.com/wee-slack/wee-slack.git",
-    "rev": "5146b1f9166bb99344b923eef859d9bd7127737d",
-    "date": "2018-11-16T15:52:03+01:00",
-    "sha256": "1rl9gzms6k258qkdpq0fg20a4k3yp5jhbfmzhdxiv8i9d63vgqch",
-    "fetchSubmodules": true
+    "rev": "55dfe7442183912339d5e08740a133fd333268b2",
+    "date": "2019-03-13T12:13:25+01:00"
   }
 }
