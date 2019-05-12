@@ -1,12 +1,12 @@
-{ kakoune, dash, runCommand, writeText, makeWrapper, lib, stdenv }:
+{ kakoune, dash, runCommand, makeWrapper, lib }:
 
 { deps, name ? kakoune.name, binDeps ? [] }: let
-  kakrc = writeText "kakrc" (lib.concatMapStrings (fn: ''
-    source ${fn}
-  '') deps);
   config-kakrc = runCommand "config-kakrc" {} ''
     mkdir -p $out/kak
-    ln -s ${kakrc} $out/kak/kakrc
+    cat > $out/kak/kakrc <<EOF
+    ${lib.concatMapStrings (fn: ''source ${fn}
+    '') deps}
+    EOF
   '';
 in runCommand name { buildInputs = [ makeWrapper ]; } ''
   makeWrapper ${kakoune}/bin/kak $out/bin/kak \

@@ -2,50 +2,36 @@
   "cd-src": {
     "url": "git://github.com/Delapouite/kakoune-cd",
     "rev": "cfe315c89575c8a15d28e25292d1ad5f666e40d2",
-    "date": "2018-11-08T19:33:36+01:00",
-    "sha256": "01561m18arx1idka6pp0gy215f5f7gf10zfcp87s9ynqchmqi5rz",
-    "fetchSubmodules": false
+    "date": "2018-11-08T19:33:36+01:00"
   },
   "easymotion-src": {
     "url": "git://github.com/danr/kakoune-easymotion",
     "rev": "7f080c172b9e0e20bf3866b9bc98cbc1d5c2d1cc",
-    "date": "2018-12-15T20:03:55+01:00",
-    "sha256": "1954jhk2rh9xgrbk2mky0akb6rcx84m9fzk3c4i7s18czxsy4c1b",
-    "fetchSubmodules": false
+    "date": "2018-12-15T20:03:55+01:00"
   },
   "ecmascript-src": {
     "url": "git://github.com/Delapouite/kakoune-ecmascript",
     "rev": "e6a60cd21a2e9e2cb8fa97343c28f8f187a92585",
-    "date": "2018-04-28T18:55:59+02:00",
-    "sha256": "0z4klj4i96dw1idjvdpkn782xqqza90y08xdyslgg6506jn8f183",
-    "fetchSubmodules": false
+    "date": "2018-04-28T18:55:59+02:00"
   },
   "eslint-formatter-src": {
     "url": "git://github.com/Delapouite/eslint-formatter-kakoune",
     "rev": "910ecf922d17a3f373e4f6cb441b4ec52c3ba035",
-    "date": "2018-10-27T14:13:46+02:00",
-    "sha256": "02i67xcmw4z101r25sgwiyqjif25yd0i1bfmgz5vmd2vhfl4jdc3",
-    "fetchSubmodules": false
+    "date": "2018-10-27T14:13:46+02:00"
   },
   "flow-src": {
     "url": "git://github.com/Delapouite/kakoune-flow",
     "rev": "c6d16a41cb9ec84705d19de303fe65c715b9bfd9",
-    "date": "2018-05-21T14:39:49+02:00",
-    "sha256": "1b65zpnrdwywkaip46rzx1r4jza9f8vb034ry4s95i1818h5vkdd",
-    "fetchSubmodules": false
+    "date": "2018-05-21T14:39:49+02:00"
   },
   "kakoune": {
     "url": "https://github.com/mawww/kakoune.git",
-    "rev": "5c0175d90a583578f4e1575c3154aa39686c1545",
-    "date": "2019-02-04T22:10:19+11:00",
-    "sha256": "0ml2sk0v8xifqwydwqsy5ndan5rnmjj5ldqjhhvx6xp413ws7slv",
-    "fetchSubmodules": false
+    "rev": "56611604b28b6c293b13e3637fbae65e6bea064c",
+    "date": "2019-03-19T22:00:57+11:00"
   },
   "kakoune-icetan": {
     "url": "https://github.com/icetan/kakoune.git",
     "rev": "cb8270feaad8c31ca1baa35c65b500d4237a9736",
-    "date": "2018-07-09T14:20:52+02:00",
-    "sha256": "1gw2gjqa9cik3fxwf9rbf22dm2lr1hlxmx3sv2kr09ix5mv42fsi",
-    "fetchSubmodules": false
+    "date": "2018-07-09T14:20:52+02:00"
   }
 }

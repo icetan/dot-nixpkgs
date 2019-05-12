@@ -1,18 +1,9 @@
-{ writeText, fetchgit, rtrav, src-block, lib, ripgrep, kak-lsp }: let
+{ writeText, rtrav, src-block, lib, ripgrep, kak-lsp }: let
   inherit (builtins) readFile fromJSON elem;
   inherit (lib) filterAttrs;
 
   deps = fromJSON (readFile ./deps.json);
-  fetch = src: fetchgit { inherit (src) url rev sha256 fetchSubmodules; };
-
-  inherit (deps)
-    #easymotion-src
-    #ecmascript-src
-    #eslint-formatter-src
-    #flow-src
-    cd-src
-    #typescript-src
-    ;
+  fetch = src: fetchGit { inherit (src) url rev; };
 in [
 #  (writeText "easymotion.kak" ''
 #    source ${fetch easymotion-src}/easymotion.kak
@@ -47,7 +38,7 @@ in [
 #  '')
 
   (writeText "cd.kak" ''
-    source ${fetch cd-src}/cd.kak
+    source ${fetch deps.cd-src}/cd.kak
 
     # Suggested aliases
     alias global cdd change-directory-current-buffer

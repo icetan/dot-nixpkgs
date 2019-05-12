@@ -4,7 +4,7 @@ let
   inherit (lib) substring replaceStrings;
   git-src = (lib.importJSON ./deps.json).kakoune;
   kakoune-git = kakoune.overrideDerivation (oldAttr: rec {
-    src = fetchgit { inherit (git-src) url rev sha256 fetchSubmodules; };
+    src = fetchGit { inherit (git-src) url rev; };
     version = "v${replaceStrings ["-"] ["."] (substring 0 10 git-src.date)}";
     name = "kakoune-git-${version}";
     buildInputs = oldAttr.buildInputs ++ [ pkgconfig ];
@@ -38,7 +38,7 @@ in {
 
       ./rc/mu.kak
 
-      "${self.pairon}/src/editor-plugins/kakoune/pairon.kak"
+      "${self.pairon}/editor-plugins/kakoune/pairon.kak"
       (writeText "pairon-enable.kak" "pairon-global-enable")
     ] ++ plugins;
     binDeps = [ self.pairon ];
