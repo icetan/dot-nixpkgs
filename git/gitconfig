@@ -1,5 +1,6 @@
 [push]
     default = simple
+    recurseSubmodules = on-demand
 [alias]
     fap = fetch --all --prune
     s    = status -s
@@ -16,6 +17,10 @@
     # submodules
     sui = submodule update --init
     suir = submodule update --init --recursive
+    ser = "!git submodule foreach --recursive 'git remote -v' | awk '/(fetch)/{gsub(/\\.git$/, \"\", $2); print $2}' | sed s/$/$(.git/$(grep -oE '[^ ]*$' .git/HEAD))/ | sort | uniq"
+    ssr = "!git submodule status --recursive | sed 's|^[-+ ][^ ]* \\([^ ][^ ]*\\)\\( (\\(.*/\\)\\?\\(.*\\))\\)\\?$|\\1@\\4|' | tree --fromfile /dev/stdin"
+    # TODO: fix syntax error, maybe something todo with backslashes
+    #serg = "!git submodule foreach --recursive 'git remote -v' | awk '/Entering/{gsub(/'\''/, "");e=$2} /(fetch)/{gsub(/\\.git$/, "", $2);arr[$2]=arr[$2] "\n    " e} END{for (a in arr) print a arr[a]}'
 
     todo = "!f() { rg --files-with-matches ${1-TODO} | xargs -L1 git blame -e -- | grep `git config user.email` | grep ${1-TODO} -A2; }; f"
 
