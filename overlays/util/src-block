@@ -12,6 +12,7 @@ $PRE_RES = $ENV{SB_PRE_RES};
 $PRE     = $ENV{SB_PRE};
 $PRE_END = $ENV{SB_PRE_END};
 $END_RES = $ENV{SB_END_RES};
+$STRIP   = $ENV{SB_STRIP};
 
 if ($STYLE =~ m/^org$/i) {
   # Org mode output as comments
@@ -19,6 +20,14 @@ if ($STYLE =~ m/^org$/i) {
   $END     //= "^[\t ]*#\\+END_SRC\$";
   $STR_RES //= "\n\n*#\\+RESULTS:\n";
   $PRE_RES //= ": ";
+} elsif ($STYLE =~ m/^sh$/i) {
+  # Shell input
+  $START   //= "#:%f\\[";
+  $END     //= "\\]:";
+  $STR_RES //= "\n";
+  $PRE_RES //= "#: ";
+  $END_RES //= "#:#";
+  $STRIP //= "^#[\t ]*";
 } elsif ($STYLE =~ m/^md$/i) {
   # Markdown input as comments
   $START   //= "<!--%f\\[";
@@ -49,7 +58,11 @@ $DEL = shift if $ARGV[0] eq "-d";
 
 sub r { my %g = @_;
   return $g{all} if ($DEL or $g{flags} =~ m/x/);
-  local $_ = `printf %s '$g{body}' | $g{cmd}`;
+  local $body = $g{body};
+  local $cmd = $g{cmd};
+  $body =~ s/$STRIP//gsm if $STRIP;
+  $cmd =~ s/$STRIP//gsm if $STRIP;
+  local $_ = `printf %s '$body' | $g{cmd}`;
   if ($g{flags} !~ m/[pr]/) { s/^/$PRE_RES/gsm; $_ = $STR_RES_ . $_; }
   if ($g{flags} =~ m/[p]/ ) { $_ = $PRE . $_ . $PRE_END; }
   if ($g{flags} =~ m/[r]/ ) { $_ = "\n" . $_; }
