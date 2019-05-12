@@ -54,4 +54,10 @@ in rec {
     #!${dash}/bin/dash
     watch -n20 -tc 'echo $(tput bold)'"$2"'$(tput sgr0); echo; ${go-jira}/bin/jira '"$1"' </dev/null | ${scut}/bin/scut'
   '';
+
+  pass-push = writeScriptBin "pass-push" ''
+    #!${dash}/bin/dash
+    git -C ~/.password-store commit -m "Update submodules" -a
+    git -C ~/.password-store push
+  '';
 }
