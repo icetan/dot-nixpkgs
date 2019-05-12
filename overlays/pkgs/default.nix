@@ -46,11 +46,9 @@ in rec {
     # ${javacs}/bin/javacs
   };
 
-  pairon = callPackage (import (fetchFromGitHub {
-    owner = "icetan";
-    repo = "pairon";
-    rev = "87e15fedfcd496d070e4bee462dfa8f67c0a8530";
-    sha256 = "0zzm0s0anb7d6lnbn28njvj6by3jday2jvd3lf135vara4gi1s5r";
+  pairon = callPackage (import (fetchTarball {
+    url = "https://github.com/icetan/pairon/tarball/v0.1.1";
+    sha256 = "1kajcsbhhkfj8wp1zcgmlpc6ng5h0nc4s1d0irax20rnr5kmjji8";
   })) {};
 
   nix-lsp = buildRustPackage {
