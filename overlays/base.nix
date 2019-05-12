@@ -1,12 +1,14 @@
 self: super: with super; let
   setPrio = num: drv: self.lib.addMetaAttrs { priority = num; } drv;
 in rec {
+  # TODO: Move to seperate overlays
   my-weechat = callPackage (import ../weechat) {};
   my-git = (callPackage (import ../git) {}) {
     extraConf = ~/.local/gitconfig;
     excludesFile = ../git/gitignore;
   };
   mail-env = callPackage (import ../mail) {};
+
   chat-env = self.buildEnv {
     name = "chat-env";
     ignoreCollisions = true;
@@ -19,6 +21,9 @@ in rec {
     name = "base-env";
     ignoreCollisions = true;
     paths = [
+      #bash
+      bashCompletion
+
       self.kakoune-plugins
       self.tmux-custom
       self.tmux-share
@@ -35,6 +40,7 @@ in rec {
 
       pass
       gnupg
+      self.pass-push
 
       aspell
       aspellDicts.en
