@@ -55,7 +55,7 @@
         file=$3
         enc=$2
         conv() {
-          iconv -f$(echo "$enc" | tr [:lower:] [:upper:] | tr -d -) -tUTF8 < "$file" | tr -d \\r
+          iconv -f$(echo "$enc" | tr [:lower:] [:upper:]) -tUTF8 < "$file" | tr -d \\r
         }
         case "$1" in
           text/html)
