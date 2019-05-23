@@ -1,4 +1,5 @@
 set global tabstop     2
+set global softtabstop 2 # smarttab.kak
 set global indentwidth 2
 set global scrolloff   3,5
 

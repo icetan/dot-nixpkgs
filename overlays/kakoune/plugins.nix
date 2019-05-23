@@ -1,10 +1,10 @@
-{ writeText, rtrav, src-block, lib, ripgrep, kak-lsp }: let
+{ writeText, rtrav, src-block, lib, ripgrep, kak-lsp, pairon }: let
   inherit (builtins) readFile fromJSON elem;
   inherit (lib) filterAttrs;
 
   deps = fromJSON (readFile ./deps.json);
   fetch = src: fetchGit { inherit (src) url rev; };
-in [
+in {
 #  (writeText "easymotion.kak" ''
 #    source ${fetch easymotion-src}/easymotion.kak
 #    map -docstring 'easymotion word' \
@@ -37,7 +37,7 @@ in [
 #    source ${fetch flow-src}/flow.kak
 #  '')
 
-  (writeText "cd.kak" ''
+  cd = writeText "cd.kak" ''
     source ${fetch deps.cd-src}/cd.kak
 
     # Suggested aliases
@@ -50,18 +50,18 @@ in [
     map global goto d '<esc>:change-directory-current-buffer<ret>' -docstring 'current buffer dir'
     map global goto r '<esc>:change-directory-project-root<ret>' -docstring 'project root dir'
     map global user e ':edit-current-buffer-directory<ret>' -docstring 'edit in current buffer dir'
-  '')
+  '';
 
-  (writeText "ripgrep.kak" ''
+  ripgrep = writeText "ripgrep.kak" ''
     set global grepcmd '${ripgrep}/bin/rg --column'
-  '')
+  '';
 
-  (writeText "src-block.kak" ''
+  src-block = writeText "src-block.kak" ''
     map global user '[' '|SB_STYLE=''${kak_buffile##*.} ${src-block}/bin/src-block<ret>' -docstring 'expand source blocks'
     map global user ']' '|SB_STYLE=''${kak_buffile##*.} ${src-block}/bin/src-block -d<ret>' -docstring 'unexpand source blocks'
-  '')
+  '';
 
-  (writeText "kak-lsp.kak" ''
+  kak-lsp = writeText "kak-lsp.kak" ''
     eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
 
     # Start debug logging
@@ -72,5 +72,23 @@ in [
 
     # User key mappings
     map global user 'h' ':lsp-hover<ret>' -docstring 'show lsp hover'
-  '')
-]
+  '';
+
+  smarttab = writeText "smarttab.kak" ''
+    source ${fetch deps.smarttab}/rc/smarttab.kak
+
+    # Detect tabs in file and turn of expansion
+    hook global BufOpenFile .* %{ evaluate-commands -buffer %val(hook_param) %{ try %{
+      execute-keys '%s^\t<ret>'
+      smarttab
+    } catch %{
+      expandtab
+    }}}
+  '';
+
+  pairon = writeText "pairon.kak" ''
+    source ${pairon}/editor-plugins/kakoune/pairon.kak
+
+    pairon-global-enable
+  '';
+}

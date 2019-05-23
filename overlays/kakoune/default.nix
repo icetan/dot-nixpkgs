@@ -16,15 +16,14 @@ in {
   inherit kakoune-git;
   kakoune-plugins = kakix {
     name = "${kakoune-git.name}-with-plugins";
-    deps = [
-      ./rc/settings.kak
+    deps = with plugins; [
       ./rc/highlight.kak
       ./rc/map.kak
 
       ./rc/linenr.kak
       ./rc/search.kak
       ./rc/xsel.kak
-      ./rc/expandtab.kak (writeText "expandtab-enable.kak" "expandtab")
+      #./rc/expandtab.kak #(writeText "expandtab-enable.kak" "expandtab")
       ./rc/fzf.kak
       ./rc/git-edit.kak
       ./rc/auto-mkdir.kak
@@ -35,12 +34,23 @@ in {
       ./rc/ft/xml.kak
       ./rc/ft/markdown.kak
       ./rc/ft/json.kak
+      ./rc/ft/go.kak
 
       ./rc/mu.kak
 
-      "${self.pairon}/editor-plugins/kakoune/pairon.kak"
-      (writeText "pairon-enable.kak" "pairon-global-enable")
-    ] ++ plugins;
+      #"${self.pairon}/editor-plugins/kakoune/pairon.kak"
+      #(writeText "pairon-enable.kak" "pairon-global-enable")
+
+      # Plugins
+      pairon
+      cd
+      ripgrep
+      kak-lsp
+      src-block
+      smarttab
+
+      ./rc/settings.kak
+    ];
     binDeps = [ self.pairon ];
   };
 }
