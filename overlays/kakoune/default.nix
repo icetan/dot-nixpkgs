@@ -21,6 +21,7 @@ in {
       ./rc/map.kak
 
       ./rc/linenr.kak
+      ./rc/number-lines-toggle.kak
       ./rc/search.kak
       ./rc/xsel.kak
       #./rc/expandtab.kak #(writeText "expandtab-enable.kak" "expandtab")
