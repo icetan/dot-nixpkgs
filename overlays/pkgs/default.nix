@@ -62,20 +62,15 @@ in rec {
              , "org.scalameta:metals_2.12:${metals_version}"
              , "-M", "scala.meta.metals.Main"]
 
-      [language.elm]
-      filetypes = ["elm"]
-      roots = ["elm.json"]
-      command = "elm-language-server"
-
       [language.nix]
       filetypes = ["nix"]
       roots = [".git", ".hg"]
       command = "nix-lsp"
 
-      #[language.dhall]
-      #filetypes = ["dhall"]
-      #roots = [".git", ".hg"]
-      #command = "dhall-lsp-server"
+      [language.dhall]
+      filetypes = ["dhall"]
+      roots = [".git", ".hg"]
+      command = "dhall-lsp-server"
     '';
     # ${nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio
     # ${javacs}/bin/javacs
