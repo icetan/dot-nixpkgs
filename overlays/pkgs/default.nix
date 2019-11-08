@@ -81,10 +81,11 @@ in rec {
     # ${javacs}/bin/javacs
   };
 
-  pairon = callPackage (import (fetchTarball {
-    url = "https://github.com/icetan/pairon/tarball/v0.1.1";
-    sha256 = "1kajcsbhhkfj8wp1zcgmlpc6ng5h0nc4s1d0irax20rnr5kmjji8";
-  })) {};
+  pairon = callPackage (fetchGit {
+    url = "https://github.com/icetan/pairon";
+    ref = "v0.1.3";
+    rev = "a01c6389fa1b3f3fdc8bcc4e843a1a0d1de08137";
+  }) {};
 
   nix-lsp = nightlyBuildRustPackage {
     name = "nix-lsp";
