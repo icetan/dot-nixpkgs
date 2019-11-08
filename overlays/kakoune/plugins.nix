@@ -78,12 +78,12 @@ in {
     source ${fetch deps.smarttab}/rc/smarttab.kak
 
     # Detect tabs in file and turn of expansion
-    hook global BufOpenFile .* %{ evaluate-commands -buffer %val(hook_param) %{ try %{
+    hook global WinSetOption filetype=.* %{ try %{
       execute-keys '%s^\t<ret>'
       smarttab
     } catch %{
       expandtab
-    }}}
+    }}
   '';
 
   pairon = writeText "pairon.kak" ''

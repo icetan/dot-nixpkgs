@@ -113,7 +113,7 @@ mu-view %{ eval %sh{
   ((
     mu view --summary-len=1 "${1}" | head -n-1
     echo
-    mail-view "${form}" ${partdir}/*
+    mail-view "${form}" "" ${partdir}/*
   ) > ${output} 2>&1 ) > /dev/null 2>&1 < /dev/null
 
   printf %s\\n "eval -try-client '$kak_opt_toolsclient' %{

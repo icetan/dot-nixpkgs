@@ -6,7 +6,7 @@
 }: let
   inherit (builtins) readFile;
 
-  deps = (lib.importJSON ./deps.json);
+  deps = lib.importJSON ./deps.json;
   fetchdep = dep: fetchGit { inherit (dep) url rev; };
 
   plugins = {
@@ -64,6 +64,10 @@
 
     # aspell
     export ASPELL_CONF="data-dir $HOME/.nix-profile/lib/aspell"
+
+    # matrix
+    export LUA_CPATH="${getLuaCPath cjson}"
+    export LUA_PATH="${getLuaPath cjson}"
 
     # Copy config to ~/.weechat
     export WEECHAT_HOME="$HOME/.weechat"

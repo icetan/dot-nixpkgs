@@ -1,4 +1,4 @@
-{ lib, stdenv, callPackage, writeText, runCommand, makeWrapper, git, gnupg }:
+{ lib, stdenv, callPackage, writeText, runCommand, makeWrapper, bash, git, gnupg }:
 
 { extraConf ? null, excludesFile ? null }:
 
@@ -8,10 +8,10 @@ let
   inherit (lib) makeBinPath;
 
   git-commit-msg = writeText "commit-msg" ''
-    #!/bin/bash
+    #!${bash}/bin/bash
     set -e
 
-    grepit() { grep -Eo '^[A-Z]{1,}-[0-9]{1,}\b' $@; }
+    grepit() { grep -Eo '^[A-Z]{1,}-[0-9]{1,}\b' "$@"; }
     grepid() { grepit -q "$1"; }
 
     grepid "$1" || {

@@ -31,11 +31,12 @@ in {
       ./rc/surround.kak
       ./rc/git.kak (writeText "git-enable.kak" "auto-git-show-global-enable")
 
-      ./rc/ft/nix.kak
+      #./rc/ft/nix.kak
       ./rc/ft/xml.kak
       ./rc/ft/markdown.kak
       ./rc/ft/json.kak
       ./rc/ft/go.kak
+      ./rc/ft/dhall.kak
 
       ./rc/mu.kak
 

@@ -1,13 +1,13 @@
 { lib, stdenv, makeOverridable, runCommand, fetchurl, makeWrapper, writeText }:
 let
-  version = "6.0.1";
+  version = "6.2.1";
   name = "kak-lsp-${version}";
   src' = runCommand "kak-lsp-unpack" {} ''
     mkdir -p $out
     ( cd $out
       tar xzvf ${fetchurl {
         url = "https://github.com/ul/kak-lsp/releases/download/v${version}/kak-lsp-v${version}-x86_64-unknown-linux-musl.tar.gz";
-        sha256 = "0phf0bhmv0qgif1jgx5xnp9w8glxyw1yrdh1xcg7w590dhpdsplm";
+        sha256 = "1sd8h791w398wy8y0rjqn4pwrjvca2kzlvm3yaz0nfch7kzs2f6n";
       }}
     )
   '';

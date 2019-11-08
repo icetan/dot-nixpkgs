@@ -23,6 +23,7 @@ in rec {
     paths = [
       #bash
       bashCompletion
+      nix-bash-completions
 
       self.kakoune-plugins
       self.tmux-custom
