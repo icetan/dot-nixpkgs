@@ -20,7 +20,7 @@ Channel ${name}
 Master :${name}-remote:
 Slave :${name}-local:
 # Mailboxes to sync
-Patterns "INBOX" "Archive" "Drafts" "Sent" "Trash" "DeltaChat"
+Patterns "INBOX" "Archive" "Drafts" "Sent" "Trash" "Junk"
 # Automatically create missing mailboxes, both locally and on the server
 Create Both
 Expunge Both

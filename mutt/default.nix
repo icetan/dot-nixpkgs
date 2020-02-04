@@ -23,8 +23,9 @@ let
               +${account.dir}/Archive \
               +${account.dir}/Drafts \
               +${account.dir}/Sent \
-              +"${account.dir}/Trash" \
-              +${account.dir}/DeltaChat
+              +${account.dir}/Trash \
+              +${account.dir}/Junk
+
     # Other special folders.
     set spoolfile = "+${account.dir}/Inbox"
     set mbox      = "+${account.dir}/Archive"
