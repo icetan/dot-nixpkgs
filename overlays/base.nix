@@ -42,6 +42,7 @@ in rec {
       pass
       gnupg
       self.pass-push
+      self.update-deps
 
       aspell
       aspellDicts.en
