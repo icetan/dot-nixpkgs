@@ -197,16 +197,17 @@ in rec {
   };
 
   dhall-haskell = let
-    version = "1.27.0";
+    version = "1.29.0";
   in self.buildEnv {
     name = "dhall-haskell-${version}";
     ignoreCollisions = true;
     paths = map (x: dhallHaskellPackage ({ inherit version; } // x)) [
-      { subName = null        ; subVersion =  version; sha256 = "1qb4x6xsl5wnwnx4zbp2gnv653gf2fybdh1z27hmlxr4qv0kracv"; }
-      { subName = "bash"      ; subVersion = "1.0.24"; sha256 = "0gmdmxlgz632v5rvi17i9lsqjcvbkdjchif6cvwjadfg9hq0c9xd"; }
-      { subName = "json"      ; subVersion = "1.5.0" ; sha256 = "1ia9xafz0h0nr358j955yqlzv7h697hm5mk131smw3d49ffk0080"; }
-      { subName = "lsp-server"; subVersion = "1.0.2" ; sha256 = "0vlnxmp78jna6bd0yhy8lh5c18lxcqvm9pcnmmrw4rdidy5ax0dj"; }
-      { subName = "nix"       ; subVersion = "1.1.9" ; sha256 = "19sw5hvwipzyazlzfys1384pynbb5sfg9rnvbwn6gzd5ppgb0bm8"; }
+      { subName = null        ; subVersion =  version ; sha256 = "0nfpppsg2ahdrjkpczifcn5ixc55lc3awxrbggkcd72gf0539abr"; }
+      { subName = "bash"      ; subVersion = "1.0.27" ; sha256 = "16aqbsnshk89ykhd9bwgk4dad8n3mkw95w8403qi4f7x3bw8ry74"; }
+      { subName = "json"      ; subVersion = "1.6.1"  ; sha256 = "0qddrngfl926dgl29x2xdh32cgx94wkcnsm94kyx87wb4y3cbxga"; }
+      { subName = "lsp-server"; subVersion = "1.0.4"  ; sha256 = "0n69mrxjq1gnv7hvgqvqr7w5zy5m9niwyyrdlxqf99wk5c2s9072"; }
+      { subName = "nix"       ; subVersion = "1.1.11" ; sha256 = "1817n7girf5zvsgpgcyr4vpp7s0pwcy1k0lmsmk4d6bxmr4gbh5a"; }
+      { subName = "yaml"      ; subVersion = "1.0.1"  ; sha256 = "1ca88macdcx6bqw0ic3l7i4i97rpsscx3a6svcbb3dbp2k5daqj8"; }
     ];
   };
 
