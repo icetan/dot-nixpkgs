@@ -58,6 +58,6 @@ in rec {
   pass-push = writeScriptBin "pass-push" ''
     #!${dash}/bin/dash
     git -C ~/.password-store commit -m "Update submodules" -a
-    git -C ~/.password-store push
+    git -C ~/.password-store push --recurse-submodules=on-demand
   '';
 }
