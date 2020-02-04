@@ -8,7 +8,7 @@ let
   inherit (lib) makeBinPath;
 
   git-commit-msg = writeText "commit-msg" ''
-    #!${bash}/bin/bash
+    #!/bin/bash
     set -e
 
     grepit() { grep -Eo '^[A-Z]{1,}-[0-9]{1,}\b' "$@"; }
