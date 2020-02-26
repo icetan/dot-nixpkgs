@@ -16,7 +16,7 @@
       my-mail-utils = utils;
     };
 
-    myKhal = callPackage (import ../khal.nix) {};
+    myKhal = khal; #callPackage (import ../khal.nix) {};
     khalFormat = "» {start-end-time-style}{repeat-symbol} {title} @ {location}{description-separator}{description}";
 
     myIsync = (callPackage (import ../isync) {}) accounts;
@@ -82,9 +82,13 @@
         ${mu}/bin/mu find maildir:/Inbox flag:u >/dev/null 2>&1
       '';
 
+      #calendar-sync = writeScript "calendar-sync" ''
+      #  #!${dash}/bin/dash
+      #  curl -sL "''${1:-$ICS_SYNC_URL}" | ${myKhal}/bin/khal import --batch /dev/stdin
+      #'';
       calendar-sync = writeScript "calendar-sync" ''
         #!${dash}/bin/dash
-        curl -sL "''${1:-$ICS_SYNC_URL}" | ${myKhal}/bin/khal import --batch /dev/stdin
+        exec ${vdirsyncer}/bin/vdirsyncer sync
       '';
 
       agenda = writeScript "kagenda" ''
@@ -106,6 +110,7 @@
       myIsync
       myMsmtp
       myKhal
+      vdirsyncer
       mu
       utils
     ] ++ optionalPackages;

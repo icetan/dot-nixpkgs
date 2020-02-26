@@ -3,12 +3,18 @@
 let
   config = writeText "config" ''
     [calendars]
-    [[private]]
-    path = ~/.local/share/khal/calendars/private
-    type = calendar
+    [[calendars]]
+    path = ~/.calendars/*
+    type = discover
+    color = dark green
 
-    [default]
-    default_calendar = private
+    #[calendars]
+    #[[private]]
+    #path = ~/.local/share/khal/calendars/private
+    #type = calendar
+
+    #[default]
+    #default_calendar = private
 
     [locale]
     timeformat = %H:%M
