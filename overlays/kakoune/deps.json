@@ -6,8 +6,8 @@
   },
   "easymotion-src": {
     "url": "git://github.com/danr/kakoune-easymotion",
-    "rev": "9f69176ab1460570b6db7f7f89d5ef66b57e9055",
-    "date": "2019-06-27T19:16:02+02:00"
+    "rev": "4359cac91b21e6fd126c4a3503a54b5a09362953",
+    "date": "2020-02-08T10:23:50+01:00"
   },
   "ecmascript-src": {
     "url": "git://github.com/Delapouite/kakoune-ecmascript",
@@ -26,8 +26,8 @@
   },
   "kakoune": {
     "url": "https://github.com/mawww/kakoune.git",
-    "rev": "9ca479ed40ceea29eb3b7949fb776e92e5f6e8dc",
-    "date": "2020-01-16T20:52:20+11:00"
+    "rev": "b8eef27e041ce68fda01f66e3cc902e97b25fbaf",
+    "date": "2020-02-26T17:45:52+11:00"
   },
   "kakoune-icetan": {
     "url": "https://github.com/icetan/kakoune.git",
