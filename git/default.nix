@@ -46,14 +46,13 @@ let
 
     + (readFile ./gitconfig)
   );
-
-  homedir = runCommand "gitconfig-home" {} ''
-    mkdir -p $out/git
-    ln -s ${gitconfig} $out/git/config
-  '';
 in runCommand "git-wrapper" { buildInputs = [ makeWrapper ]; } ''
   makeWrapper ${git}/bin/git $out/bin/git \
+    --run "
+      XDG_CONFIG_HOME=\''${XDG_CONFIG_HOME:-~/.config}
+      mkdir -p \$XDG_CONFIG_HOME/git
+      ln -sf ${gitconfig} \$XDG_CONFIG_HOME/git/config
+    " \
     --set GIT_CONFIG_NOSYSTEM 1 \
-    --set XDG_CONFIG_HOME '${homedir}' \
     --prefix PATH : ${makeBinPath [ gnupg ]}
 ''
