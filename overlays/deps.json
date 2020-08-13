@@ -8,10 +8,5 @@
     "url": "https://github.com/mozilla/nixpkgs-mozilla",
     "rev": "ac8e9d7bbda8fb5e45cae20c5b7e44c52da3ac0c",
     "date": "2019-07-24T16:02:40+02:00"
-  },
-  "weechat-matrix": {
-    "url": "https://github.com/torhve/weechat-matrix-protocol-script",
-    "rev": "5278fb65447e2ea81b39a239fdb90093723de259",
-    "date": "2019-07-01T14:03:59+02:00"
   }
 }

@@ -3,10 +3,6 @@ self: super: with super; let
 in rec {
   # TODO: Move to seperate overlays
   my-weechat = callPackage (import ../weechat) {};
-  my-git = (callPackage (import ../git) {}) {
-    extraConf = ~/.local/gitconfig;
-    excludesFile = ../git/gitignore;
-  };
   mail-env = callPackage (import ../mail) {};
 
   chat-env = self.buildEnv {
@@ -26,10 +22,13 @@ in rec {
       nix-bash-completions
 
       self.kakoune-plugins
-      self.tmux-custom
-      self.tmux-share
-      my-git
+      self.kak-lsp
 
+      #self.tmux-custom
+      #self.tmux-share
+      tmux
+
+      git
       gitAndTools.hub
       git-crypt
       tree
