@@ -38,43 +38,12 @@ let
   fetchdep = dep: fetchGit { inherit (dep) url rev; };
 in rec {
   docker-credential-helpers = callPackage (import ./docker-credential-helpers.nix) {};
+
   signal-cli = callPackage (import ./signal-cli.nix) {};
+
   javacs = import ./javacs { inherit pkgs; };
-  inherit (callPackage (import ./kak-lsp.nix) {}) kak-lsp;
-  kak-lsp-extra = makeOverridable kak-lsp.override {
-    extraConfig = ''
-      [language.typescript]
-      filetypes = ["ts", "tsx"]
-      roots = ["tsconfig.json", "package.json"]
-      command = "javascript-typescript-stdio"
 
-      [language.java]
-      filetypes = ["java"]
-      roots = ["pom.xml"]
-      command = "javacs"
-
-      [language.scala]
-      filetypes = ["scala", "sbt"]
-      roots = ["build.sbt"]
-      command = "coursier"
-      args = ["launch"
-             , "-r", "bintray:scalameta/maven"
-             , "org.scalameta:metals_2.12:${metals_version}"
-             , "-M", "scala.meta.metals.Main"]
-
-      [language.nix]
-      filetypes = ["nix"]
-      roots = [".git", ".hg"]
-      command = "nix-lsp"
-
-      [language.dhall]
-      filetypes = ["dhall"]
-      roots = [".git", ".hg"]
-      command = "dhall-lsp-server"
-    '';
-    # ${nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio
-    # ${javacs}/bin/javacs
-  };
+  kak-lsp = callPackage (import ./kak-lsp.nix) {};
 
   pairon = callPackage (fetchGit {
     url = "https://github.com/icetan/pairon";

@@ -17,7 +17,7 @@ mu %{ evaluate-commands %sh{
     ( ${kak_opt_mucmd} "${@:-}" \
       | linebuf sed 's/\(.*\)|||\(.*\)|||\(.*\)|||\(.*\)|||\(.*\)/\1\n\2\n\3\n\4\n\5/g' \
       | linebuf tr '\n' '\0' \
-      | xargs -0 -L5 printf '[%-4s] %-35s %-50s %-100s %s\n' \
+      | xargs -0 -L5 printf '[%-5s] %-35s %-50s %-100s %s\n' \
       > ${output} 2>&1 &
     ) > /dev/null 2>&1 < /dev/null
 
@@ -32,7 +32,7 @@ mu %{ evaluate-commands %sh{
 
 hook -group mu-highlight global WinSetOption filetype=mu %{
     add-highlighter window/mu group
-    add-highlighter window/mu/ regex "^\[(.+?)\] (.+? CET)  +((?:[^ ]+? )+<[^@]+@.+?>|[^@]+@[^ ]+?) (.+?) (%%/.+?)$" 1:red 2:magenta 3:cyan 4:green 5:black
+    add-highlighter window/mu/ regex "^\[(.+?)\] (.+? CES?T)  +((?:[^ ]+? )+<[^@]+@.+?>|[^@]+@[^ ]+?) (.+?) (%%/.+?)$" 1:red 2:magenta 3:cyan 4:green 5:black
     add-highlighter window/mu/ line %{%opt{mu_current_line}} default+b
     hook -once -always window WinSetOption filetype=.* %{ remove-highlighter window/mu }
 }
@@ -87,6 +87,12 @@ def -hidden mu-jump %{
 decl -docstring "shell command run to view an e-mail" \
     str muviewcmd 'mu view'
 
+def -params 1 -file-completion \
+    -docstring %{mu-view-gui <msgfile>: view an e-mail via xdg-open} \
+mu-view-gui %{ nop %sh{
+  (nohup xdg-open "$1") > /dev/null 2>&1 < /dev/null &
+}}
+
 def -params .. -file-completion \
     -docstring %{mu-view <msgflags> <msgfile>: view an e-mail} \
 mu-view %{ evaluate-commands %sh{
@@ -133,7 +139,7 @@ mu-view %{ evaluate-commands %sh{
     set buffer filetype mail
     remove-highlighter wrap
     ${maps}
-    map -docstring \"open in browser\" buffer user o \":echo %sh{ xdg-open '${msgpart}' }<ret>\"
+    map -docstring \"open in browser\" buffer user o \":mu-view-gui '${msgpart}'<ret>\"
     hook -always -once buffer BufClose .* %{ nop %sh{ rm -r ${outdir} } }
   }"
 }}

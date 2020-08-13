@@ -23,7 +23,8 @@ in {
       ./rc/linenr.kak
       ./rc/number-lines-toggle.kak
       ./rc/search.kak
-      ./rc/wl-clipboard.kak
+      #./rc/wl-clipboard.kak
+      ./rc/xsel.kak
       #./rc/expandtab.kak #(writeText "expandtab-enable.kak" "expandtab")
       ./rc/fzf.kak
       ./rc/git-edit.kak

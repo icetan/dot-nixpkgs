@@ -62,13 +62,13 @@ in {
   '';
 
   kak-lsp = writeText "kak-lsp.kak" ''
-    eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
+    eval %sh{kak-lsp --kakoune -s $kak_session}
 
     # Start debug logging
     # (removing this stops javacs from working for some reason)
     nop %sh{
       {
-        ${kak-lsp}/bin/kak-lsp -s $kak_session -vvv > /tmp/kak-lsp.$kak_session.log
+        kak-lsp -s $kak_session -vvv > /tmp/kak-lsp.$kak_session.log
         rm -f /tmp/kak-lsp.$kak_session.log
       } > /dev/null 2>&1 < /dev/null &
     }
