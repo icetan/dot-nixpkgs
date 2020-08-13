@@ -16,7 +16,6 @@
       my-mail-utils = utils;
     };
 
-    myKhal = khal; #callPackage (import ../khal.nix) {};
     khalFormat = "» {start-end-time-style}{repeat-symbol} {title} @ {location}{description-separator}{description}";
 
     myIsync = (callPackage (import ../isync) {}) accounts;
@@ -59,17 +58,17 @@
         }
         case "$1" in
           text/html)
-            conv | ${elinks}/bin/elinks -dump -force-html -dump-width 80
+            conv | ${elinks}/bin/elinks -dump -localhost 1 -force-html -dump-width 80
             ;;
           text/calendar|text/ics)
-            conv | ${myKhal}/bin/khal printics --format '{start-date} ${khalFormat}' /dev/stdin
+            conv | ${khal}/bin/khal printics --format '{start-date} ${khalFormat}' /dev/stdin
             ;;
           text/enriched)
             conv | pandoc -f rtf -t plain
             ;;
           image/*)
             echo "Can't display images"
-            ${feh}/bin/feh "$3" 2> /dev/null &
+            xdg-open "$3" 2> /dev/null &
             ;;
           *)
             conv | fmt -cs -w 100
@@ -93,7 +92,7 @@
 
       agenda = writeScript "kagenda" ''
         #!${dash}/bin/dash
-        watch -n 300 -ct '${myKhal}/bin/khal --color list --format "${khalFormat}" today ''${1:-20} days | fold -s; ${calendar-sync} >/dev/null 2>&1 &'
+        watch -n 300 -ct '${khal}/bin/khal --color list --format "${khalFormat}" today ''${1:-20} days | fold -s; ${calendar-sync} >/dev/null 2>&1 &'
       '';
     };
 
@@ -109,7 +108,7 @@
     paths = [
       myIsync
       myMsmtp
-      myKhal
+      khal
       vdirsyncer
       mu
       utils

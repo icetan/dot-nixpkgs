@@ -41,7 +41,7 @@ hdr_order from: to: cc: date: subject:  # and in this order
 set date_format = "%m/%d %H:%M"
 set index_format    ="%4C  [%Z]  %D  %-20.20L  %s"
 set sort = threads                         # like gmail
-set sort_aux = reverse-last-date-received  # like gmail
+#set sort_aux = reverse-last-date-received  # like gmail
 
 # Status Bar
 set status_chars  = " *%A"
@@ -106,6 +106,8 @@ bind index G            last-entry
 bind index,pager R      group-reply
 bind index,pager <tab>  sync-mailbox
 bind index <space>      collapse-thread
+# Requires notmuch index
+#bind index,pager x      entire-thread
 bind index o            display-message
 bind index p            recall-message
 
