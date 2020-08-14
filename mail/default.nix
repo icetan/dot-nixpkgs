@@ -32,9 +32,13 @@
             ${concatMapStrings (a: with a; ''
             ${name})
               echo SYNCING ACCOUNT: ${name} '<${email}>'
+              if test ! -d "${root}/${dir}"; then muInit=1; fi
               mkdir -p "${root}/${dir}"
               ${myIsync}/bin/mbsync ${name}
-              ${mu}/bin/mu index -m "${root}/${dir}" --my-address="${email}"
+              if test -n "$muInit"; then
+                ${mu}/bin/mu init -m "${root}/${dir}" --my-address="${email}"
+              fi
+              ${mu}/bin/mu index
               ;;
             '') accounts}
             *)
