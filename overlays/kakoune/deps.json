@@ -16,8 +16,8 @@
   },
   "eslint-formatter-src": {
     "url": "git://github.com/Delapouite/eslint-formatter-kakoune",
-    "rev": "910ecf922d17a3f373e4f6cb441b4ec52c3ba035",
-    "date": "2018-10-27T14:13:46+02:00"
+    "rev": "01f7697c1c1d65887a6ffc381b3f0646465591d3",
+    "date": "2020-12-11T12:43:09+01:00"
   },
   "flow-src": {
     "url": "git://github.com/Delapouite/kakoune-flow",
@@ -26,8 +26,8 @@
   },
   "kakoune": {
     "url": "https://github.com/mawww/kakoune.git",
-    "rev": "2c437cfa02ca568750182209ef6249c6975243a5",
-    "date": "2020-08-04T19:40:43+10:00"
+    "rev": "26cf5cd1dce362a34593fcf5994c961f8aa53bc0",
+    "date": "2021-02-01T20:16:30+11:00"
   },
   "kakoune-icetan": {
     "url": "https://github.com/icetan/kakoune.git",
@@ -36,7 +36,7 @@
   },
   "smarttab": {
     "url": "https://github.com/andreyorst/smarttab.kak",
-    "rev": "c585da5aa3e5cf9d1264e6296b6e6ee808e3d102",
-    "date": "2020-07-26T11:04:47+03:00"
+    "rev": "6e3264df7a9a786961e634d5ae8fb117ca86ef0a",
+    "date": "2020-12-17T12:35:38+03:00"
   }
 }

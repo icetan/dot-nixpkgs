@@ -35,7 +35,7 @@ in {
       --prefix PATH : ${maven}/bin
   '';
 
-  meta = with pkgs.stdenv.lib; {
+  meta = with pkgs.lib; {
     homepage = https://github.com/georgewfraser/vscode-javac;
     description = "Java Compiler API Language Server";
     license = licenses.mit;

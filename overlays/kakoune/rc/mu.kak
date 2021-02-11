@@ -133,13 +133,14 @@ mu-view %{ evaluate-commands %sh{
     echo
     mail-view "$form" "" "$msgpart"
   ) > "$output" 2>&1 ) > /dev/null 2>&1 < /dev/null
+  cp "$msgpart" "$msgpart.html"
 
   printf %s\\n "evaluate-commands -try-client '$kak_opt_toolsclient' %{
     edit! -readonly -existing ${output}
     set buffer filetype mail
     remove-highlighter wrap
     ${maps}
-    map -docstring \"open in browser\" buffer user o \":mu-view-gui '${msgpart}'<ret>\"
+    map -docstring \"open in browser\" buffer user o \":mu-view-gui '${msgpart}.html'<ret>\"
     hook -always -once buffer BufClose .* %{ nop %sh{ rm -r ${outdir} } }
   }"
 }}

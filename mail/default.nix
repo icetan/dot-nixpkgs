@@ -62,7 +62,7 @@
         }
         case "$1" in
           text/html)
-            conv | ${elinks}/bin/elinks -dump -localhost 1 -force-html -dump-width 80
+            ${elinks}/bin/elinks -dump -localhost 1 -force-html -dump-width 80 < "$file"
             ;;
           text/calendar|text/ics)
             conv | ${khal}/bin/khal printics --format '{start-date} ${khalFormat}' /dev/stdin
@@ -116,6 +116,7 @@
       vdirsyncer
       mu
       utils
+      aerc
     ] ++ optionalPackages;
   }) // {
     inherit accounts setAccounts;

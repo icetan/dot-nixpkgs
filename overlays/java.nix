@@ -22,7 +22,7 @@ in {
     };
   });
 
-  android-env = stdenv.lib.overrideDerivation (buildEnv {
+  android-env = pkgs.lib.overrideDerivation (buildEnv {
     name = "android-env";
     ignoreCollisions = true;
     paths = [ androidsdk androidndk gradle ];

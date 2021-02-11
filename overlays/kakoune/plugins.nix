@@ -65,18 +65,15 @@ in {
     eval %sh{kak-lsp --kakoune -s $kak_session}
 
     # Start debug logging
-    # (removing this stops javacs from working for some reason)
-    nop %sh{
-      {
-        kak-lsp -s $kak_session -vvv > /tmp/kak-lsp.$kak_session.log
-        rm -f /tmp/kak-lsp.$kak_session.log
-      } > /dev/null 2>&1 < /dev/null &
-    }
+    #set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 
-    lsp-enable
+    hook global WinSetOption filetype=(rust|python|go|javascript|typescript|c|cpp) %{
+      lsp-enable-window
+    }
 
     # User key mappings
     map global user 'h' ':lsp-hover<ret>' -docstring 'show lsp hover'
+    map global user l %{: enter-user-mode lsp<ret>} -docstring "LSP mode"
   '';
 
   smarttab = writeText "smarttab.kak" ''

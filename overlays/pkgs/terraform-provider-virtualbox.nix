@@ -1,4 +1,4 @@
-{ stdenv, buildGoPackage, fetchFromGitHub, pkgconfig, makeWrapper, cdrtools }:
+{ stdenv, lib, buildGoPackage, fetchFromGitHub, pkgconfig, makeWrapper, cdrtools }:
 
 # USAGE:
 # install the following package globally or in nix-shell:
@@ -40,7 +40,7 @@ buildGoPackage rec {
   # if the versions are not provided via file paths.
   postBuild = "mv go/bin/terraform-provider-virtualbox{,_v${version}}";
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = https://github.com/terra-farm/terraform-provider-virtualbox;
     description = "Terraform provider for VirtualBox";
     platforms = platforms.linux;

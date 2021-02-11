@@ -5,12 +5,12 @@ def number-lines-toggle -docstring 'number-lines-toggle: toggle line number gutt
   if test "${kak_opt_number_lines_toggle}" = 0; then
     printf %s\\n "
       add-highlighter global/ number-lines
-      set buffer number_lines_toggle 1
+      set global number_lines_toggle 1
     "
   else
     printf %s\\n "
       remove-highlighter global/number-lines
-      set buffer number_lines_toggle 0
+      set global number_lines_toggle 0
     "
   fi
 }}

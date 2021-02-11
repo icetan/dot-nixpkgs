@@ -6,12 +6,12 @@
   },
   "wee-slack": {
     "url": "https://github.com/wee-slack/wee-slack",
-    "rev": "42850c14a7108547323ca393a1f7ab2195efa8ed",
-    "date": "2019-08-07T19:35:12+02:00"
+    "rev": "069378f95ca09a73252cefadd5cf8d2e4a976a61",
+    "date": "2020-04-05T20:22:46+02:00"
   },
   "weechat-matrix": {
     "url": "https://github.com/poljar/weechat-matrix",
-    "rev": "dc97101d47187f15e106579200ad0d17e9e67192",
-    "date": "2019-07-16T12:24:33-05:00"
+    "rev": "d415841662549f096dda09390bfdebd3ca597bac",
+    "date": "2020-04-07T11:11:45+02:00"
   }
 }

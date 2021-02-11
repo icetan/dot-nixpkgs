@@ -20,7 +20,7 @@ in stdenv.mkDerivation {
       --set JAVA_HOME ${jre}
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     homepage = https://github.com/AsamK/signal-cli;
     description = "signal-cli (formerly textsecure-cli) provides a commandline and dbus interface for WhisperSystems/libsignal-service-java";
     license = licenses.gpl3;

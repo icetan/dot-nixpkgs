@@ -3,6 +3,10 @@ self: super: with super; let
 in rec {
   # TODO: Move to seperate overlays
   my-weechat = callPackage (import ../weechat) {};
+  #my-git = (callPackage (import ../git) {}) {
+  #  extraConf = ~/.local/gitconfig;
+  #  excludesFile = ../git/gitignore;
+  #};
   mail-env = callPackage (import ../mail) {};
 
   chat-env = self.buildEnv {

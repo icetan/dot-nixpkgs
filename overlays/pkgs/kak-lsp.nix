@@ -1,13 +1,13 @@
 { lib, stdenv, makeOverridable, runCommand, fetchurl, makeWrapper, writeText }:
 let
-  version = "8.0.0";
+  version = "9.0.0";
   name = "kak-lsp-${version}";
   src' = runCommand "kak-lsp-unpack" {} ''
     mkdir -p $out
     ( cd $out
       tar xzvf ${fetchurl {
         url = "https://github.com/ul/kak-lsp/releases/download/v${version}/kak-lsp-v${version}-x86_64-unknown-linux-musl.tar.gz";
-        sha256 = "1p9i66ilnzlib93lrhivcj50awfqm1s4zjmbfa8nca5yr7hwbmmn";
+        sha256 = "1g7gsb84zqr34829j5f2vhalshjxwfdwazcvrdksm7xgf7cwb8pi";
       }}
     )
   '';
@@ -35,7 +35,7 @@ in makeOverridable (
       patchShebangs $out/bin/kak-lsp
     '';
 
-    meta = with stdenv.lib; {
+    meta = with lib; {
       homepage = https://github.com/ul/kak-lsp;
       description = "Kakoune Language Server Protocol client";
       license = licenses.unlicense;

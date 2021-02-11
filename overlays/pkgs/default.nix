@@ -45,6 +45,41 @@ in rec {
 
   kak-lsp = callPackage (import ./kak-lsp.nix) {};
 
+  #kak-lsp-extra = makeOverridable kak-lsp.override {
+  #  extraConfig = ''
+  #    [language.typescript]
+  #    filetypes = ["ts", "tsx"]
+  #    roots = ["tsconfig.json", "package.json"]
+  #    command = "javascript-typescript-stdio"
+
+  #    [language.java]
+  #    filetypes = ["java"]
+  #    roots = ["pom.xml"]
+  #    command = "javacs"
+
+  #    [language.scala]
+  #    filetypes = ["scala", "sbt"]
+  #    roots = ["build.sbt"]
+  #    command = "coursier"
+  #    args = ["launch"
+  #           , "-r", "bintray:scalameta/maven"
+  #           , "org.scalameta:metals_2.12:${metals_version}"
+  #           , "-M", "scala.meta.metals.Main"]
+
+  #    [language.nix]
+  #    filetypes = ["nix"]
+  #    roots = [".git", ".hg"]
+  #    command = "nix-lsp"
+
+  #    [language.dhall]
+  #    filetypes = ["dhall"]
+  #    roots = [".git", ".hg"]
+  #    command = "dhall-lsp-server"
+  #  '';
+  #  # ${nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio
+  #  # ${javacs}/bin/javacs
+  #};
+
   pairon = callPackage (fetchGit {
     url = "https://github.com/icetan/pairon";
     ref = "v0.1.3";
@@ -118,7 +153,7 @@ in rec {
     # test result: FAILED. 80 passed; 12 failed; 0 ignored; 0 measured; 0 filtered out
     doCheck = false;
 
-    meta = with stdenv.lib; {
+    meta = with pkgs.lib; {
       description = "Fast, light, robust Ethereum implementation";
       homepage = "http://parity.io";
       license = licenses.gpl3;

@@ -1,4 +1,4 @@
-{ stdenv, pkgconfig, buildGoPackage }:
+{ stdenv, lib, pkgconfig, buildGoPackage }:
 
 let
   owner = "docker";
@@ -29,7 +29,7 @@ in buildGoPackage rec {
     cp go/src/${goPackagePath}/bin/docker-credential-pass $out/bin
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = ''
       docker-credential-helpers is a suite of programs to use native stores to
       keep Docker credentials safe.
